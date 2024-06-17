@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+	<head th:fragment="head">
+		<meta charset="UTF-8">
+		<title data-th-text="${titulo}"></title>
+		<!-- Metadatos -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Bootstrap -->
+		<link th:rel="stylesheet" data-th-href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+		<!-- Archivo CSS -->
+		<link th:rel="stylesheet" data-th-href="@{/css/estilos.css}">
+		<!-- Favicon -->
+		<link rel="icon" type="image/x-icon" data-th-href="@{/img/logofce.jpg}">
+		<!-- Iconos Bootstrap -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+		
+	</head>
+	<body>
+		<header th:fragment="header">
+			<div class="container bg-white my-2 rounded-4">
+				<div class="py-3 mb-4">
+					<div class="container">
+						<div class="row d-flex justify-content-center">
+							<div class="col-6 col-xl-2 d-flex justify-content-center">
+								<a href="https://www.unju.edu.ar/" class="">
+									<img data-th-src="@{/img/logoUnjuVirtual.png}" class="img-fluid" alt="LogoUnjuVirtual" width="150" height="75">
+								</a>
+							</div>
+							<div class="col-6 col-xl-1 d-flex justify-content-center">
+								<a href="/principal" class="">
+									<img data-th-src="@{/img/logofce.jpg}" class="img-fluid" alt="Logofce" width="75" height="75">
+								</a>
+							</div>
+							<div class="col-xl-9 d-flex justify-content-center">
+								<p class="h1 fw-bold nombre display-5">Facultad de Ciencias Económicas</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+	</body>
+</html>

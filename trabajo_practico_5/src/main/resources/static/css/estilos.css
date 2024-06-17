@@ -1,0 +1,45 @@
+@charset "UTF-8";
+
+body{
+	background-image:url(../img/fondo.png);
+}
+
+.nombre{
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.contact a{
+	text-decoration:none;
+	color:white;
+}
+
+.contact i{
+	color:white;
+	font-size:1rem;
+}
+
+.iconos-redes-sociales a{
+	width:50px;
+	height:50px;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	padding:2px;
+	margin:10px;
+	border:2px solid white;
+	border-radius:50%;
+}
+
+.iconos-redes-sociales i{
+	color:white;
+	font-size:1.5rem;
+}
+
+.iconos-redes-sociales a:hover{
+	background-color:white;
+	border:2px solid rgb(13, 110, 253);
+}
+
+.iconos-redes-sociales a:hover i{
+	color:black;
+}

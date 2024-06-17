@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+	<head data-th-replace="~{/layouts/header :: head}"></head>
+<body>
+	<header data-th-replace="~{/layouts/header :: header}"></header>
+		
+	<div class="container">
+		
+		<nav data-th-replace="~{/layouts/navbar :: navbar}"></nav>
+		
+		<div class="row">
+				<div class="col col-sm-12 fondo-form">
+					<div class="row mb-5">
+						<!-- Alerta -->
+						<div th:if="${exito}" class="alert alert-success alert-dismissible fade show" role="alert">
+							<strong data-th-text="${mensaje}"></strong>
+							<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+						</div>
+						<div th:if="${!exito && mensaje != ''}" class="alert alert-danger alert-dismissible fade show" role="alert">
+							<strong data-th-text="${mensaje}"></strong>
+							<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+						</div>
+						<!-- Botón Agregar -->
+						<div class="dgrid gap-2 d-md-flex justify-content-md-end mb-2">
+							<a class="btn btn-success" data-th-href="@{/materia/nuevo}" role="button">Agregar Materia</a>
+						</div>
+						<table class="table table-hover table-striped">
+							<thead>
+							    <tr class="table-dark">
+							      <th scope="col" class="text-center">Código</th>
+							      <th scope="col" class="text-center">Nombre</th>
+							      <th scope="col" class="text-center">Curso</th>
+							      <th scope="col" class="text-center">Horas</th>
+							      <th scope="col" class="text-center">Modalidad</th>
+							      <th scope="col" class="text-center">Docente</th>
+							      <th scope="col" class="text-center">Carrera</th>
+							      <th scope="col" class="text-center">Opciones</th>
+							    </tr>
+							  </thead>
+							  <tbody>
+							  	<tr data-th-each="mat : ${materias}">
+							  		<td class="text-center" data-th-text="${mat.codigo}"></td>
+							  		<td class="text-center" data-th-text="${mat.nombre}"></td>
+							  		<td class="text-center" data-th-text="${mat.curso}"></td>
+							  		<td class="text-center" data-th-text="${mat.cantidadHoras}+' horas'"></td>
+							  		<td class="text-center" data-th-text="${mat.modalidad}"></td>
+							  		<td class="text-center" data-th-text="${mat.docente.nombre + ' ' + mat.docente.apellido}"></td>
+							  		<td class="text-center" data-th-text="${mat.carrera.nombre}"></td>
+							  		<td>
+							  			<div class="text-center">
+							  				<a class="btn btn-warning" data-th-href="@{/materia/modificar/}+${mat.codigo}" role="button">Editar</a>
+							  				<!-- BOTON QUE LLAMA AL MODAL -->
+											<button type="button" class="btn btn-danger me-2 b" data-bs-toggle="modal" th:attr="data-bs-target=${'#modalEliminar' + mat.codigo}">Eliminar</button>
+							  			</div>
+							  			
+							  			<!-- Modal -->
+										<div class="modal fade" th:id="${'modalEliminar' + mat.codigo}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+										  <div class="modal-dialog">
+										    <div class="modal-content">
+										      <div class="modal-header">
+										        <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmar Eliminación</h1>
+										        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+										      </div>
+										      <div class="modal-body">
+												¿Está seguro de que desea eliminar la materia?
+											  </div>
+										      <div class="modal-footer">
+										        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+												<!-- BOTON ELIMINAR-->
+												<a type="button" role="button" class="btn btn-danger me-2 b" data-th-href="@{/materia/eliminar/}+${mat.codigo}">Eliminar</a>
+										      </div>
+										    </div>
+										  </div>
+										</div>
+							  		</td>
+							  	</tr>
+							  </tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+	</div>
+		
+	<!-- Footer -->
+	<footer data-th-replace="~{/layouts/footer :: footer}"></footer>
+	<!-- Bootstrap JavaScript -->
+	<script type="text/javascript" data-th-src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
