@@ -7,12 +7,17 @@ import org.springframework.stereotype.Component;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Component
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@Getter
+@Setter
+
 public class Alumno {
 
 	private int dni;
