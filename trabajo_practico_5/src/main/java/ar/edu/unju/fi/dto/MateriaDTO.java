@@ -16,6 +16,6 @@ public class MateriaDTO {
 	private String curso;
 	private byte cantidadHoras;
 	private String modalidad;
-	private String docente;
-	private String carrera;
+	private DocenteDTO docente;
+	private CarreraDTO carrera;
 }
