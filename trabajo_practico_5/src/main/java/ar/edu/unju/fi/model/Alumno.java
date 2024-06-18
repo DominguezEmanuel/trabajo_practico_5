@@ -25,7 +25,7 @@ public class Alumno {
 	private String apellido;
 	private String email;
 	private String telefono;
-	@DateTimeFormat(pattern = "dd-MM-yyyy")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate fechaNacimiento;
 	private String domicilio;
 	private String lu;
