@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import ar.edu.unju.fi.collections.CollectionAlumno;
-import ar.edu.unju.fi.model.Alumno;
+import ar.edu.unju.fi.dto.AlumnoDTO;
+import ar.edu.unju.fi.service.IAlumnoService;
 
 import org.springframework.ui.Model;
 
@@ -19,11 +19,14 @@ import org.springframework.ui.Model;
 public class AlumnoController {
 
 	@Autowired
-	private Alumno alumno;
+	private AlumnoDTO alumnoDTO;
+	
+	@Autowired
+	private IAlumnoService alumnoService;
 	
 	@GetMapping("/listado")
 	public String getAlumnosPage(Model model) {
-		model.addAttribute("alumnos", CollectionAlumno.getAlumnos());
+		model.addAttribute("alumnos", alumnoService.getAlumnos());
 		model.addAttribute("titulo", "Alumnos");
 		model.addAttribute("exito", false);
 		model.addAttribute("mensaje", "");
@@ -33,17 +36,17 @@ public class AlumnoController {
 	@GetMapping("/nuevo")
 	public String getNuevoAlumnoPage(Model model) {
 		Boolean edicion = false;
-		model.addAttribute("alumno", alumno);
+		model.addAttribute("alumno", alumnoDTO);
 		model.addAttribute("edicion", edicion);
 		model.addAttribute("titulo", "Nuevo Alumno");
 		return "alumno";
 	}
 	
 	@PostMapping("/guardar")
-	public ModelAndView guardarAlumno(@ModelAttribute("alumno") Alumno alumno) {
+	public ModelAndView guardarAlumno(@ModelAttribute("alumno") AlumnoDTO alumnoDTO) {
 		ModelAndView modelView = new ModelAndView("alumnos");
 		String mensaje;
-		Boolean exito = CollectionAlumno.agregarAlumno(alumno);
+		Boolean exito = alumnoService.agregarAlumno(alumnoDTO);
 		if (exito) {
 			mensaje = "Alumno guardado con éxito!";
 		}else {
@@ -51,43 +54,41 @@ public class AlumnoController {
 		}
 		modelView.addObject("exito", exito);
 		modelView.addObject("mensaje", mensaje);
-		modelView.addObject("alumnos", CollectionAlumno.getAlumnos());
+		modelView.addObject("alumnos", alumnoService.getAlumnos());
 		return modelView;
 	}
 	
 	@GetMapping("/modificar/{lu}")
 	public String getModificarAlumnoPage(Model model, @PathVariable(value="lu") String lu) {
-		Alumno alumnoEncontrado = new Alumno();
+		AlumnoDTO alumnoEncontradoDTO = alumnoService.buscarAlumno(lu);
 		boolean edicion = true;
-		alumnoEncontrado = CollectionAlumno.buscarAlumno(lu);
 		model.addAttribute("edicion", edicion);
-		model.addAttribute("alumno", alumnoEncontrado);
+		model.addAttribute("alumno", alumnoEncontradoDTO);
 		model.addAttribute("titulo", "Modificar Alumno");
 		return "alumno";
 	}
 	
 	@PostMapping("/modificar")
-	public String modificarAlumno(@ModelAttribute("alumno") Alumno alumno, Model model) {
+	public String modificarAlumno(@ModelAttribute("alumno") AlumnoDTO alumnoDTO, Model model) {
 		Boolean exito = false;
 		String mensaje = "";
 		try {
-			CollectionAlumno.modificarAlumno(alumno);
-			mensaje = "El alumno con LU " + alumno.getLu() + " fue modificado con exito!";
+			alumnoService.modificarAlumno(alumnoDTO);
+			mensaje = "Alumno modificado con exito!";
 			exito = true;
 		}catch(Exception e) {
 			mensaje = e.getMessage();
-			e.printStackTrace();
 		}
 		model.addAttribute("mensaje", mensaje);
 		model.addAttribute("exito", exito);
-		model.addAttribute("alumnos", CollectionAlumno.getAlumnos());
+		model.addAttribute("alumnos", alumnoService.getAlumnos());
 		model.addAttribute("titulo", "Alumnos");
 		return "alumnos";
 	}
 	
 	@GetMapping("/eliminar/{lu}")
 	public String eliminarAlumno(@PathVariable(value="lu") String lu) {
-		CollectionAlumno.eliminarAlumno(lu);
+		alumnoService.eliminarAlumno(lu);
 		return "redirect:/alumno/listado";
 	}
 }
