@@ -12,12 +12,12 @@ import ar.edu.unju.fi.model.Docente;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface DocenteMapper {
+	
 	@Mapping(source="legajo" , target="legajo")
 	@Mapping(source="nombre" , target="nombre")
 	@Mapping(source="apellido" , target="apellido")
 	@Mapping(source="email" , target="email")
 	@Mapping(source="telefono" , target="telefono")
-	
 	DocenteDTO toDocenteDTO(Docente docente);
 	
 	@InheritInverseConfiguration

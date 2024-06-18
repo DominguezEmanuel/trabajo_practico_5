@@ -73,11 +73,10 @@ public class DocenteController {
 		String mensaje = "";
 		try {
 			docenteService.modificarDocente(docenteDTO);
-			mensaje = "El docente con legajo " + docenteDTO.getLegajo() + " fue modificado con exito!";
+			mensaje = "Docente modificado con exito!";
 			exito = true;
 		}catch(Exception e) {
 			mensaje = e.getMessage();
-			e.printStackTrace();
 		}
 		model.addAttribute("mensaje", mensaje);
 		model.addAttribute("exito", exito);
