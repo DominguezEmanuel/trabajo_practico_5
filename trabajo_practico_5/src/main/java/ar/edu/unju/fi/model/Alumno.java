@@ -64,6 +64,6 @@ public class Alumno {
 	private List<Materia> materias = new ArrayList<>();
 	@ManyToOne  //MAPEO RELACION ALMUNO-CARRERAS
 	@JoinColumn(name="Codigo_carrera")
-	private Carrera carrera;
+	private Carrera carreraAlumno;
 	
 }

@@ -3,12 +3,10 @@ package ar.edu.unju.fi.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -56,15 +54,12 @@ public class Materia {
 	inverseJoinColumns = @JoinColumn(name="Dni_alumno"))
 	private List<Alumno> alumnos = new ArrayList<>();
 	
-	 @Autowired
 	 @OneToOne
-	 @JoinColumn(name = "doc_mat" , referencedColumnName = "Legajo")
+	 @JoinColumn(name = "Codigo_docente")
 	  private Docente docente;
 
-	
-	@Autowired
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "carr_cod")
+	@ManyToOne
+    @JoinColumn(name = "Codigo_carrera")
     private Carrera carrera;
 
 }
