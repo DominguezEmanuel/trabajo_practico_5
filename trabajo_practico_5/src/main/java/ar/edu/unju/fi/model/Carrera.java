@@ -47,6 +47,9 @@ public class Carrera {
 	 */
 	@OneToMany(mappedBy = "carrera", cascade = CascadeType.ALL, orphanRemoval = true) //MAPEO RELACION CARRERA-ALUMNO
 	private List<Alumno> alumnos = new ArrayList<Alumno>();
+	
+	 @OneToMany(mappedBy = "carrera", cascade = CascadeType.ALL)
+	 private List <Materia> materias = new ArrayList<Materia>();
 
 	
 }

@@ -8,12 +8,15 @@ import org.springframework.stereotype.Component;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -53,10 +56,15 @@ public class Materia {
 	inverseJoinColumns = @JoinColumn(name="Dni_alumno"))
 	private List<Alumno> alumnos = new ArrayList<>();
 	
-	@Autowired
-	private Docente docente;
+	 @Autowired
+	 @OneToOne
+	 @JoinColumn(name = "doc_mat" , referencedColumnName = "Legajo")
+	  private Docente docente;
+
 	
 	@Autowired
-	private Carrera carrera;
-	
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "carr_cod")
+    private Carrera carrera;
+
 }
