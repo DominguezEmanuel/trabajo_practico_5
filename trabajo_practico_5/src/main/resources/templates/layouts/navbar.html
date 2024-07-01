@@ -12,14 +12,37 @@
 						</button>
 						<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 							<div class="navbar-nav">
-								<a class="nav-link active" aria-current="page" href="/principal">Inicio</a> 
-								<a class="nav-link" href="#noticias">Noticias</a> 
-								<a class="nav-link" href="#">Acerca de</a>
-								<a class="nav-link" href="#contacto">Contacto</a>
-								<a class="nav-link" href="/carrera/listado">Carreras</a>
-								<a class="nav-link" href="/alumno/listado">Alumnos</a>
-								<a class="nav-link" href="/docente/listado">Docentes</a>
-								<a class="nav-link" href="/materia/listado">Materias</a>
+								<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+									<li class="nav-item">
+										<a class="nav-link active" aria-current="page" href="/principal">Inicio</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" href="#noticias">Noticias</a> 
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" href="#">Acerca de</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" href="#contacto">Contacto</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" href="/carrera/listado">Carreras</a>
+									</li>
+									<li class="nav-item dropdown">
+										<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Alumnos</a>
+										<ul class="dropdown-menu">
+								            <li><a class="dropdown-item" href="/alumno/listado">Listado</a></li>
+								            <li><a class="dropdown-item" href="#">Inscripción</a></li>
+								            <li><a class="dropdown-item" href="#">Alumnos de una Carrera</a></li>
+								         </ul>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" href="/docente/listado">Docentes</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" href="/materia/listado">Materias</a>
+									</li>
+								</ul>
 							</div>
 						</div>
 					</div>
