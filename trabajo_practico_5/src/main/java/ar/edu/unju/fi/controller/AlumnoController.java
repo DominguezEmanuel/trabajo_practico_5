@@ -91,4 +91,10 @@ public class AlumnoController {
 		alumnoService.eliminarAlumno(lu);
 		return "redirect:/alumno/listado";
 	}
+	
+	@GetMapping("/inscripcion")
+	public String inscripcionAlumnoEnMateriaPage(Model model) {
+		model.addAttribute("titulo", "Formulario de Inscripción");
+		return "inscripcion_form";
+	}
 }
