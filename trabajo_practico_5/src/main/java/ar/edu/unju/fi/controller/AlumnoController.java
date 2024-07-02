@@ -59,7 +59,7 @@ public class AlumnoController {
 	}
 	
 	@GetMapping("/modificar/{lu}")
-	public String getModificarAlumnoPage(Model model, @PathVariable(value="lu") String lu) {
+	public String getModificarAlumnoPage(Model model, @PathVariable(value="lu") Integer lu) {
 		AlumnoDTO alumnoEncontradoDTO = alumnoService.buscarAlumno(lu);
 		boolean edicion = true;
 		model.addAttribute("edicion", edicion);
@@ -87,7 +87,7 @@ public class AlumnoController {
 	}
 	
 	@GetMapping("/eliminar/{lu}")
-	public String eliminarAlumno(@PathVariable(value="lu") String lu) {
+	public String eliminarAlumno(@PathVariable(value="lu") Integer lu) {
 		alumnoService.eliminarAlumno(lu);
 		return "redirect:/alumno/listado";
 	}

@@ -1,65 +1,75 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
-	<!-- head -->
-	<head data-th-replace="~{/layouts/header :: head}"></head>
-	<body>
-		<!-- Encabezado -->
-		<header data-th-replace="~{/layouts/header :: header}"></header>
-		<div class="container mb-3">
-			<!-- Barra de Navegación (nav) -->
-			<nav data-th-replace="~{/layouts/navbar :: navbar}"></nav>
-			<div class="row py-5 bg-dark rounded-4">
-				<div class="row mb-2">
-					<h3 data-th-text="${edicion}?'Modificar Docente':'Nuevo Docente'" class="text-center text-white"></h3>
-				</div>
-				<div>
-					<form data-th-action="${edicion}?@{/docente/modificar} : @{/docente/guardar}" th:object="${docente}" method="post">
-						<div class="row mb-3 justify-content-center">
-							<label for="legajo" class="col-sm-6 col-lg-2 col-form-label text-lg-end bg-warning text-dark rounded-pill">Legajo</label>
-							<div class="col-sm-6 col-lg-4">
-								<input type="text" class="form-control" id="legajo" th:field="*{legajo}" th:disabled="${edicion}?true:false" required>
-								<input type="hidden" class="form-control" id="legajo" th:field="*{legajo}" th:if="${edicion}">
-							</div>
+<!-- head -->
+
+<head data-th-replace="~{/layouts/header :: head}"></head>
+
+<body>
+	<!-- Encabezado -->
+	<header data-th-replace="~{/layouts/header :: header}"></header>
+	<div class="container mb-3">
+		<!-- Barra de Navegación (nav) -->
+		<nav data-th-replace="~{/layouts/navbar :: navbar}"></nav>
+		<div class="row py-5 bg-dark rounded-4">
+			<div class="row mb-2">
+				<h3 data-th-text="${edicion}?'Modificar Docente':'Nuevo Docente'" class="text-center text-white"></h3>
+			</div>
+			<div>
+				<form data-th-action="${edicion}?@{/docente/modificar} : @{/docente/guardar}" th:object="${docente}"
+					method="post">
+
+					<div class="row mb-3 justify-content-center">
+						<label for="legajo"
+							class="col-sm-6 col-lg-2 col-form-label text-lg-end bg-warning text-dark rounded-pill">Legajo</label>
+						<div class="col-sm-6 col-lg-4">
+							<input type="hidden" class="form-control" id="legajo" th:field="*{legajo}" th:if="${edicion}">
 						</div>
-						
-						<div class="row mb-3 justify-content-center">
-							<label for="nombre" class="col-sm-6 col-lg-2 col-form-label text-lg-end bg-warning text-dark rounded-pill">Nombre</label>
-							<div class="col-sm-6 col-lg-4">
-								<input type="text" class="form-control" id="nombre" th:field="*{nombre}" required>
-							</div>
+					</div>
+
+					<div class="row mb-3 justify-content-center">
+						<label for="nombre"
+							class="col-sm-6 col-lg-2 col-form-label text-lg-end bg-warning text-dark rounded-pill">Nombre</label>
+						<div class="col-sm-6 col-lg-4">
+							<input type="text" class="form-control" id="nombre" th:field="*{nombre}" required>
 						</div>
-						
-						<div class="row mb-3 justify-content-center">
-							<label for="apellido" class="col-sm-6 col-lg-2 col-form-label text-lg-end bg-warning text-dark rounded-pill">Apellido</label>
-							<div class="col-sm-6 col-lg-4">
-								<input type="text" class="form-control" id="apellido" th:field="*{apellido}" required>
-							</div>
+					</div>
+
+					<div class="row mb-3 justify-content-center">
+						<label for="apellido"
+							class="col-sm-6 col-lg-2 col-form-label text-lg-end bg-warning text-dark rounded-pill">Apellido</label>
+						<div class="col-sm-6 col-lg-4">
+							<input type="text" class="form-control" id="apellido" th:field="*{apellido}" required>
 						</div>
-						
-						<div class="row mb-3 justify-content-center">
-							<label for="email" class="col-sm-6 col-lg-2 col-form-label text-lg-end bg-warning text-dark rounded-pill">Email</label>
-							<div class="col-sm-6 col-lg-4">
-								<input type="email" class="form-control" id="email" th:field="*{email}">
-							</div>
+					</div>
+
+					<div class="row mb-3 justify-content-center">
+						<label for="email"
+							class="col-sm-6 col-lg-2 col-form-label text-lg-end bg-warning text-dark rounded-pill">Email</label>
+						<div class="col-sm-6 col-lg-4">
+							<input type="email" class="form-control" id="email" th:field="*{email}">
 						</div>
-						
-						<div class="row mb-3 justify-content-center">
-							<label for="telefono" class="col-sm-6 col-lg-2 col-form-label text-lg-end bg-warning text-dark rounded-pill">Teléfono</label>
-							<div class="col-sm-6 col-lg-4">
-								<input type="text" class="form-control" id="telefono" th:field="*{telefono}">
-							</div>
+					</div>
+
+					<div class="row mb-3 justify-content-center">
+						<label for="telefono"
+							class="col-sm-6 col-lg-2 col-form-label text-lg-end bg-warning text-dark rounded-pill">Teléfono</label>
+						<div class="col-sm-6 col-lg-4">
+							<input type="text" class="form-control" id="telefono" th:field="*{telefono}">
 						</div>
-						
-						<p class="text-center"><input type="submit" class="btn btn-primary" th:value="${edicion}?'Modificar':'Guardar'"></p>
-					</form>
-				</div>
+					</div>
+
+					<p class="text-center"><input type="submit" class="btn btn-primary"
+							th:value="${edicion}?'Modificar':'Guardar'"></p>
+				</form>
 			</div>
 		</div>
-		
-		<!-- Pie de Página (footer) -->
-		<footer data-th-replace="~{/layouts/footer :: footer}"></footer>
-		
-		<!-- Bootstrap JavaScript -->
-		<script type="text/javascript" data-th-src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
-	</body>
+	</div>
+
+	<!-- Pie de Página (footer) -->
+	<footer data-th-replace="~{/layouts/footer :: footer}"></footer>
+
+	<!-- Bootstrap JavaScript -->
+	<script type="text/javascript" data-th-src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
+
 </html>

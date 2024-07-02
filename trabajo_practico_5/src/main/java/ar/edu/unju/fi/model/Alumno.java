@@ -32,11 +32,13 @@ import lombok.Setter;
 @Entity(name = "ALUMNOS")
 public class Alumno {
 
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "Lu" , nullable = false)
+	private Integer lu;
 	@Column(name = "Dni_alumno")
 	private int dni;
-	
 	@NonNull
 	@Column(name = "Nombre" , nullable = false)
 	private String nombre;
@@ -56,9 +58,7 @@ public class Alumno {
 	@NonNull
 	@Column(name = "Domicilio" , nullable = false)
 	private String domicilio;
-	@NonNull
-	@Column(name = "Lu" , nullable = false)
-	private String lu;
+
 	
 	@ManyToMany(mappedBy = "alumnos") //MAPEO RELACION ALUMNO-MATERIAS
 	private List<Materia> materias = new ArrayList<>();
