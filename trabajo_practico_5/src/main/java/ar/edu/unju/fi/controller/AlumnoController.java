@@ -91,4 +91,10 @@ public class AlumnoController {
 		alumnoService.eliminarAlumno(lu);
 		return "redirect:/alumno/listado";
 	}
+	
+	@GetMapping("/carrera")
+	public String mostarAlumnosCarreraPage(Model model) {
+		model.addAttribute("titulo", "Alumnos de una carrera especifica");
+		return "consultaAlumnoCarrera";
+	}
 }
