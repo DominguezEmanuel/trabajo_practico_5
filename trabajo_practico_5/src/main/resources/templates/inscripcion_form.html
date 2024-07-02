@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+	<head data-th-replace="~{/layouts/header :: head}"></head>
+	<body>
+		<header data-th-replace="~{/layouts/header :: header}"></header>
+		
+		<div class="container">
+			<nav data-th-replace="~{/layouts/navbar :: navbar}"></nav>
+		</div>
+		
+		<!-- Footer -->
+		<footer data-th-replace="~{/layouts/footer :: footer}"></footer>
+		<!-- Bootstrap JavaScript -->
+		<script type="text/javascript" data-th-src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+	</body>
+</html>
