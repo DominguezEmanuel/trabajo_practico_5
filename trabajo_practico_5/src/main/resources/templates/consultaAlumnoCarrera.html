@@ -5,8 +5,29 @@
 		<header data-th-replace="~{/layouts/header :: header}"></header>
 		
 		<nav data-th-replace="~{/layouts/navbar :: navbar}"></nav>
-		
-		<h2> Alumnos que pertenezcan a una carrera</h2>
+		<div class="container mb-3">		
+			
+			<div class="row py-5 bg-dark rounded-4">
+				<h3 class="text-left text-white"> Alumnos que pertenezcan a una carrera</h3>
+				<form data-th-action="@{/alumno/carrera}" th:object="${carrera}" method="post">
+					
+					<div class="row mb-3 justify-content-center" th:object="${alumno}">
+						<label for="carrera"
+						class="col-sm-6 col-lg-2 col-form-label text-lg-end bg-warning text-dark rounded-pill">Seleccione carrera</label>
+						<div class="col-sm-6 col-lg-4">
+							<select id="carrera" class="form-select" th:field="*{carrera.codigo}">
+								<option data-th-each="c : ${carreras}" th:value="${c.codigo}"
+								data-th-tex="${c.nombre}"></option>
+							</select>
+						</div>
+					</div>
+					
+					<!-- Separador -->
+					<p class="text-center"> <input type="submit" class="btn btn-primary"> </p>
+				</form>		
+			</div>
+		</div>
+
 		
 		<footer data-th-replace="~{/layouts/footer :: footer}"></footer>
 		
