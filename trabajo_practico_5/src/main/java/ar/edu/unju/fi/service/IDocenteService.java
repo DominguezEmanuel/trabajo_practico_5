@@ -8,11 +8,11 @@ public interface IDocenteService {
 
 	List<DocenteDTO> getDocentes();
 	
-	DocenteDTO buscarDocente(String legajo);
+	DocenteDTO buscarDocente(Integer legajo);
 	
 	Boolean agregarDocente(DocenteDTO docenteDTO);
 	
-	void eliminarDocente(String legajo);
+	void eliminarDocente(Integer legajo);
 	
 	void modificarDocente(DocenteDTO docenteDTO) throws Exception;
 }

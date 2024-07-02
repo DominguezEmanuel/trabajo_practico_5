@@ -51,11 +51,11 @@ public class Materia {
 	@ManyToMany //mapeo relacion alumnos-materias
 	@JoinTable(name = "materias_alumnos",
 	joinColumns= @JoinColumn(name = "Codigo_materia"),
-	inverseJoinColumns = @JoinColumn(name="Dni_alumno"))
+	inverseJoinColumns = @JoinColumn(name="Lu_alumno"))
 	private List<Alumno> alumnos = new ArrayList<>();
 	
 	 @OneToOne
-	 @JoinColumn(name = "Codigo_docente")
+	 @JoinColumn(name = "Legajo_docente")
 	  private Docente docente;
 
 	@ManyToOne

@@ -8,11 +8,11 @@ public interface IAlumnoService {
 	
 	List<AlumnoDTO> getAlumnos();
 	
-	AlumnoDTO buscarAlumno(String lu);
+	AlumnoDTO buscarAlumno(Integer lu);
 	
 	Boolean agregarAlumno(AlumnoDTO alumnoDTO);
-	
-	void eliminarAlumno(String lu);
+		
+	void eliminarAlumno(Integer lu);
 	
 	void modificarAlumno(AlumnoDTO alumnoDTO) throws Exception;
 }

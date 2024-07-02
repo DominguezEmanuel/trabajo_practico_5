@@ -26,12 +26,9 @@ import lombok.Setter;
 public class Docente {
 	
 	@Id
-	@Column(name = "Codigo")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer codigo;
-	@NonNull
 	@Column(name = "Legajo" , nullable = false)
-	private String legajo;
+	private Integer legajo;
 	@NonNull
 	@Column(name = "Nombre" , nullable = false)
 	private String nombre;

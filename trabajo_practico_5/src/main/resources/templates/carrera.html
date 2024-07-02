@@ -21,7 +21,6 @@
 						<div class="row mb-3 justify-content-center">
 							<label for="codigo" class="col-sm-6 col-lg-2 col-form-label text-lg-end bg-warning text-dark rounded-pill">Código</label>
 							<div class="col-sm-6 col-lg-4">
-								<input type="number" class="form-control" id="codigo" th:field="*{codigo}" th:disabled="${edicion}?true:false">
 								<input type="hidden" class="form-control" id="codigo" th:field="*{codigo}" th:if="${edicion}">
 							</div>
 						</div>

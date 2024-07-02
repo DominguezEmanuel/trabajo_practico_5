@@ -19,5 +19,5 @@ public class AlumnoDTO {
 	private String telefono;
 	private String fechaNacimiento;
 	private String domicilio;
-	private String lu;
+	private Integer lu;
 }

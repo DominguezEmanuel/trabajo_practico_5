@@ -58,7 +58,7 @@ public class DocenteController {
 	}
 	
 	@GetMapping("/modificar/{legajo}")
-	public String getModificarDocentePage(Model model, @PathVariable(value="legajo") String legajo) {
+	public String getModificarDocentePage(Model model, @PathVariable(value="legajo") Integer legajo) {
 		DocenteDTO docenteEncontradoDTO = docenteService.buscarDocente(legajo);
 		boolean edicion = true;
 		model.addAttribute("edicion", edicion);
@@ -86,7 +86,7 @@ public class DocenteController {
 	}
 	
 	@GetMapping("/eliminar/{legajo}")
-	public String eliminarDocente(@PathVariable(value="legajo") String legajo) {
+	public String eliminarDocente(@PathVariable(value="legajo") Integer legajo) {
 		docenteService.eliminarDocente(legajo);
 		return "redirect:/docente/listado";
 	}
