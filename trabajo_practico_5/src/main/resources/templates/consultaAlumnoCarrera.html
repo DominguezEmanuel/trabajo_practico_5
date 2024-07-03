@@ -7,24 +7,45 @@
 		<nav data-th-replace="~{/layouts/navbar :: navbar}"></nav>
 		<div class="container mb-3">		
 			
+			<!-- Formulario del select -->
+
 			<div class="row py-5 bg-dark rounded-4">
-				<h3 class="text-left text-white"> Alumnos que pertenezcan a una carrera</h3>
-				<form data-th-action="@{/alumno/carrera}" th:object="${carrera}" method="post">
+				<h3 class="text-left text-white text-center mb-3">Consultar alumnos por carrera</h3>
+				<form data-th-action="@{/consulta/buscar}" method="post">
 					
-					<div class="row mb-3 justify-content-center" th:object="${alumno}">
+					<div class="row mb-3 justify-content-center">
 						<label for="carrera"
 						class="col-sm-6 col-lg-2 col-form-label text-lg-end bg-warning text-dark rounded-pill">Seleccione carrera</label>
 						<div class="col-sm-6 col-lg-4">
-							<select id="carrera" class="form-select" th:field="*{carrera.codigo}">
+							<select id="carrera" name="carreraCodigo" class="form-control">
 								<option data-th-each="c : ${carreras}" th:value="${c.codigo}"
-								data-th-tex="${c.nombre}"></option>
+								data-th-text="${c.nombre}"></option>
 							</select>
+							
 						</div>
 					</div>
-					
-					<!-- Separador -->
-					<p class="text-center"> <input type="submit" class="btn btn-primary"> </p>
+					<p class="text-center"><input type="submit" class="btn btn-primary" data-th-text="Consultar"></p>
 				</form>		
+				
+				<!-- Cards de Alumnos -->
+
+				<div class="container mt-2">
+				       <h1>Alumnos inscritos en la Materia</h1>
+				       <div class="row" th:if="${alumnos != null}">
+				           <div class="col-sm-6 col-md-4 mb-3" th:each="a : ${alumnos}">
+				               <div class="card">
+				                   <div class="card-body">
+				                       <h5 class="card-title" th:text="${a.nombre} + ' ' + ${a.apellido}"></h5>
+				                       <p class="card-text">
+				                           <strong>LU:</strong> <span th:text="${a.lu}"></span><br>
+				                           <strong>Email:</strong> <span th:text="${a.email}"></span><br>
+				                           <strong>Teléfono:</strong> <span th:text="${a.telefono}"></span>
+				                       </p>
+				                   </div>
+				               </div>
+				           </div>
+				       </div>
+				   </div>
 			</div>
 		</div>
 
