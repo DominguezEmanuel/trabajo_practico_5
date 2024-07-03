@@ -62,7 +62,7 @@ public class Alumno {
 	
 	@ManyToMany(mappedBy = "alumnos") //MAPEO RELACION ALUMNO-MATERIAS
 	private List<Materia> materias = new ArrayList<>();
-	@ManyToOne  //MAPEO RELACION ALMUNO-CARRERAS
+	@ManyToOne  //MAPEO RELACION ALUMNO-CARRERAS
 	@JoinColumn(name="Codigo_carrera")
 	private Carrera carreraAlumno;
 	

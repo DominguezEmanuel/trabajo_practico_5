@@ -18,7 +18,7 @@ import org.springframework.ui.Model;
 @Controller
 @RequestMapping("/alumno")
 public class AlumnoController {
-
+	
 	@Autowired
 	private AlumnoDTO alumnoDTO;
 	
@@ -96,11 +96,4 @@ public class AlumnoController {
 		return "redirect:/alumno/listado";
 	}
 	
-	@GetMapping("/carrera")
-	public String mostarAlumnosCarreraPage(Model model) {
-		model.addAttribute("titulo", "Alumnos de una carrera especifica");
-		model.addAttribute("carreras", carreraService.getCarreras());
-		model.addAttribute("alumno", alumnoService.getAlumnos());
-		return "consultaAlumnoCarrera";
-	}
 }

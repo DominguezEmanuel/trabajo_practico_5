@@ -12,9 +12,13 @@ public interface IAlumnoService {
 	
 	AlumnoDTO buscarAlumno(Integer lu);
 	
+	void agregarMateria(Integer lu , Integer codigo);
+	
 	Boolean agregarAlumno(AlumnoDTO alumnoDTO);
 		
 	void eliminarAlumno(Integer lu);
 	
 	void modificarAlumno(AlumnoDTO alumnoDTO) throws Exception;
+	
+	
 }

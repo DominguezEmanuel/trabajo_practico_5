@@ -23,6 +23,8 @@ public interface AlumnoMapper {
 	@Mapping(source="lu" , target="lu")
 	AlumnoDTO toAlumnoDTO(Alumno alumno);
 	
+	@Mapping(target = "carreraAlumno", ignore = true)
+	@Mapping(target = "materias", ignore = true)
 	@InheritInverseConfiguration
 	Alumno toAlumno(AlumnoDTO alumnoDTO);
 	
