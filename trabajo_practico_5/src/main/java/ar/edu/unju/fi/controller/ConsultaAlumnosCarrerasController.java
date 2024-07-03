@@ -13,7 +13,7 @@ import ar.edu.unju.fi.service.ICarreraService;
 
 @Controller
 @RequestMapping("/consulta")
-public class ConsultaAlumnosMateriasController {
+public class ConsultaAlumnosCarrerasController {
 
 	@Autowired
 	IAlumnoService alumnoService;

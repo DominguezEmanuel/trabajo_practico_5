@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import ar.edu.unju.fi.dto.AlumnoDTO;
 import ar.edu.unju.fi.mapper.AlumnoMapper;
 import ar.edu.unju.fi.model.Alumno;
+import ar.edu.unju.fi.model.Materia;
 import ar.edu.unju.fi.repository.AlumnoRepository;
 import ar.edu.unju.fi.repository.MateriaRepository;
 import ar.edu.unju.fi.service.IAlumnoService;
@@ -20,7 +21,17 @@ public class AlumnoServiceImpl implements IAlumnoService {
 	private AlumnoRepository alumnoRepository;
 	@Autowired
 	private AlumnoMapper alumnoMapper;
+	@Autowired
+	private MateriaRepository materiaRepository;
 	
+	
+	@Override
+	public void agregarMateria(Integer lu,  Integer codigo) {
+		Alumno alumno = alumnoRepository.findById(lu).get();
+		Materia materia = materiaRepository.findById(codigo).get();
+		alumno.getMaterias().add(materia);
+		alumnoRepository.save(alumno);
+	}
 	
 	
 
