@@ -15,4 +15,6 @@ public interface IAlumnoService {
 	void eliminarAlumno(Integer lu);
 	
 	void modificarAlumno(AlumnoDTO alumnoDTO) throws Exception;
+	
+	
 }

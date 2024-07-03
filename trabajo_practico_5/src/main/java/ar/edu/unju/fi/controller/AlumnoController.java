@@ -10,6 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.dto.AlumnoDTO;
+import ar.edu.unju.fi.dto.MateriaDTO;
+import ar.edu.unju.fi.mapper.MateriaMapper;
+import ar.edu.unju.fi.model.Materia;
+import ar.edu.unju.fi.repository.AlumnoRepository;
+import ar.edu.unju.fi.repository.MateriaRepository;
 import ar.edu.unju.fi.service.IAlumnoService;
 import ar.edu.unju.fi.service.IMateriaService;
 
@@ -18,15 +23,27 @@ import org.springframework.ui.Model;
 @Controller
 @RequestMapping("/alumno")
 public class AlumnoController {
-
+	
 	@Autowired
 	private AlumnoDTO alumnoDTO;
+	
+	@Autowired
+	private MateriaDTO materiaDTO;
+	
+	@Autowired
+	private MateriaMapper materiaMapper;
 	
 	@Autowired
 	private IAlumnoService alumnoService;
 	
 	@Autowired
 	private IMateriaService materiaService;
+	
+	@Autowired
+	private AlumnoRepository alumnoRepository;
+	
+	@Autowired
+	private MateriaRepository materiaRepository;
 	
 	@GetMapping("/listado")
 	public String getAlumnosPage(Model model) {
@@ -96,11 +113,15 @@ public class AlumnoController {
 		return "redirect:/alumno/listado";
 	}
 	
-	@GetMapping("/inscripcion")
-	public String inscripcionAlumnoEnMateriaPage(Model model) {
+	@GetMapping("/inscripcion/{codigo}")
+	public String inscripcionAlumnoEnMateriaPage(Model model, @PathVariable(value="codigo") Integer codigo) {
+		//MateriaDTO materiaEncontradaDTO = materiaService.buscarMateria(codigo);
+		//Materia materia = materiaMapper.toMateria(materiaEncontradaDTO);
+		//AlumnoDTO alumnoDTO = new AlumnoDTO();
 		model.addAttribute("titulo", "Formulario de Inscripción");
 		model.addAttribute("materias" , materiaService.getMaterias());
-		model.addAttribute("alumnos" , alumnoService.getAlumnos());
+		//model.addAttribute("alumnos" , alumnoService.getAlumnos());
+		//model.addAttribute("alumno" , alumnoDTO);
 		return "inscripcion_form";
 	}
 }
