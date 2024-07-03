@@ -6,6 +6,38 @@
 		
 		<div class="container">
 			<nav data-th-replace="~{/layouts/navbar :: navbar}"></nav>
+			<div class="row py-5 bg-dark rounded-4">
+				<div class="row mb-2">
+					<p class="h1">Inscripción a Materia</p>
+				</div>
+				<div>
+					<form>
+						<div class="row mb-3 justify-content-center">
+							<label for="alumno" class="col-sm-6 col-lg-2 col-form-label text-lg-end bg-warning text-dark rounded-pill">Alumnos</label>
+							<div class="col-sm-6 col-lg-4">
+								<select id="alumno" class="form-select">
+									<option data-th-each="alum : ${alumnos}" th:value="${alum.lu}"
+									data-th-text="${alum.nombre + ' ' + alum.apellido}"></option>
+								</select>
+							</div>
+						</div>
+						
+						<div class="row mb-3 justify-content-center">
+							<label for="materia" class="col-sm-6 col-lg-2 col-form-label text-lg-end bg-warning text-dark rounded-pill">Materiass</label>
+							<div class="col-sm-6 col-lg-4">
+								<select id="materia" class="form-select">
+									<option data-th-each="mat : ${materias}" th:value="${mat.codigo}"
+									data-th-text="${mat.nombre}"></option>
+								</select>
+							</div>
+						</div>
+						
+						<div>
+							<p class="text-center"><input type="submit" class="btn btn-primary">Enviar</p>
+						</div>
+					</form>
+				</div>
+			</div>
 		</div>
 		
 		<!-- Footer -->

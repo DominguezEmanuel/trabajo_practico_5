@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.dto.AlumnoDTO;
 import ar.edu.unju.fi.service.IAlumnoService;
+import ar.edu.unju.fi.service.IMateriaService;
 
 import org.springframework.ui.Model;
 
@@ -23,6 +24,9 @@ public class AlumnoController {
 	
 	@Autowired
 	private IAlumnoService alumnoService;
+	
+	@Autowired
+	private IMateriaService materiaService;
 	
 	@GetMapping("/listado")
 	public String getAlumnosPage(Model model) {
@@ -95,6 +99,8 @@ public class AlumnoController {
 	@GetMapping("/inscripcion")
 	public String inscripcionAlumnoEnMateriaPage(Model model) {
 		model.addAttribute("titulo", "Formulario de Inscripción");
+		model.addAttribute("materias" , materiaService.getMaterias());
+		model.addAttribute("alumnos" , alumnoService.getAlumnos());
 		return "inscripcion_form";
 	}
 }
