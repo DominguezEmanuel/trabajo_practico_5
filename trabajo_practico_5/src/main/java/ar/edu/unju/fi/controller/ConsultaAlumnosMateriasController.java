@@ -30,11 +30,12 @@ public class ConsultaAlumnosMateriasController {
 	}
 	
 	
-	//Aqui usé la anotación RequestParam que recibe parametros directamente desde la página
+	//Aqui usé la anotación RequestParam que recibe parámetros directamente desde la página
 	@PostMapping("/buscar")
 	public String getAlumnosByCarrera(@RequestParam Integer carreraCodigo, Model model ) {
 		model.addAttribute("carreras", carreraService.getCarreras());
 	    model.addAttribute("alumnos", carreraService.getAlumnosCarrera(carreraCodigo));
+	    model.addAttribute("carreraSeleccionada", carreraService.buscarCarrera(carreraCodigo).getNombre());
 		model.addAttribute("titulo", "Consulta de Alumnos");
 		model.addAttribute("exito", false);
 		model.addAttribute("mensaje", "");

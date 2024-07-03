@@ -10,7 +10,7 @@
 			<!-- Formulario del select -->
 
 			<div class="row py-5 bg-dark rounded-4">
-				<h3 class="text-left text-white text-center mb-3">Consultar alumnos por carrera</h3>
+				<h2 class="text-white text-center mb-3">Consultar alumnos por carrera</h2>
 				<form data-th-action="@{/consulta/buscar}" method="post">
 					
 					<div class="row mb-3 justify-content-center">
@@ -24,13 +24,15 @@
 							
 						</div>
 					</div>
-					<p class="text-center"><input type="submit" class="btn btn-primary" data-th-text="Consultar"></p>
+					<p class="text-center"><input type="submit" class="btn btn-warning" value="Buscar Alumnos"></p>
 				</form>		
+				
 				
 				<!-- Cards de Alumnos -->
 
+				<h2 class="text-center text-white m-3" data-th-text="'Alumnos Inscriptos en ' + ${carreraSeleccionada}"></h2>
+
 				<div class="container mt-2">
-				       <h1>Alumnos inscritos en la Materia</h1>
 				       <div class="row" th:if="${alumnos != null}">
 				           <div class="col-sm-6 col-md-4 mb-3" th:each="a : ${alumnos}">
 				               <div class="card">

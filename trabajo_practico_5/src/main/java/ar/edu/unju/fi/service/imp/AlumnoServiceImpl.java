@@ -9,6 +9,7 @@ import ar.edu.unju.fi.dto.AlumnoDTO;
 import ar.edu.unju.fi.mapper.AlumnoMapper;
 import ar.edu.unju.fi.model.Alumno;
 import ar.edu.unju.fi.repository.AlumnoRepository;
+import ar.edu.unju.fi.repository.MateriaRepository;
 import ar.edu.unju.fi.service.IAlumnoService;
 
 @Service("alumnoServiceMySQL")
@@ -21,6 +22,8 @@ public class AlumnoServiceImpl implements IAlumnoService {
 	private AlumnoMapper alumnoMapper;
 	
 	
+	
+
 	@Override
 	public List<AlumnoDTO> getAlumnos() {
 		List<AlumnoDTO> alumnosDTO = alumnoMapper.toAlumnoDTOList(alumnoRepository.findAll());
