@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ar.edu.unju.fi.dto.AlumnoDTO;
 import ar.edu.unju.fi.dto.CarreraDTO;
+import ar.edu.unju.fi.mapper.AlumnoMapper;
 import ar.edu.unju.fi.mapper.CarreraMapper;
 import ar.edu.unju.fi.model.Carrera;
 import ar.edu.unju.fi.repository.CarreraRepository;
@@ -18,7 +20,16 @@ public class CarreraServiceImpl implements ICarreraService{
 	private CarreraRepository carreraRepository;
 	@Autowired
 	private CarreraMapper carreraMapper;
+
+	@Autowired
+	AlumnoMapper alumnoMapper;
 	
+	
+	public List<AlumnoDTO> getAlumnosCarrera(int codigo){
+	Carrera carrera = carreraRepository.findById(codigo).get();
+	List<AlumnoDTO> alumnos = alumnoMapper.toAlumnoDTOList(carrera.getAlumnos());
+	return alumnos;
+	}
 	@Override
 	public List<CarreraDTO> getCarreras() {
 		List<CarreraDTO> carrerasDTO = carreraMapper.toCarreraDTOList(carreraRepository.findAll());
