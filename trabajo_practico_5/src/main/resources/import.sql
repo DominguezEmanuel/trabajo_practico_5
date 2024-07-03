@@ -15,9 +15,4 @@ insert into materias(codigo_materia , nombre , curso , cantidad_horas , modalida
 insert into materias(codigo_materia , nombre , curso , cantidad_horas , modalidad , legajo_docente , codigo_carrera) values (2 , 'Introducción a la Matemática' , 'Segundo' , 60 , 'Presencial' , 1 , 2);
 insert into materias(codigo_materia , nombre , curso , cantidad_horas , modalidad , legajo_docente , codigo_carrera) values (3 , 'Historia de la Economía' , 'Segundo' , 40 , 'Virtual' , 4 , 1);
 insert into materias(codigo_materia , nombre , curso , cantidad_horas , modalidad , legajo_docente , codigo_carrera) values (4 , 'Practica Profesional dentro de la Economía' , 'Quinto' , 45 , 'Presencial' , 2 , 3);
-insert into materias_alumnos(codigo_materia , lu_alumno) values (2 , 6);
-insert into materias_alumnos(codigo_materia , lu_alumno) values (1 , 1);
-insert into materias_alumnos(codigo_materia , lu_alumno) values (3 , 5);
-insert into materias_alumnos(codigo_materia , lu_alumno) values (4 , 5);
-insert into materias_alumnos(codigo_materia , lu_alumno) values (2 , 2);
-insert into materias_alumnos(codigo_materia , lu_alumno) values (3 , 3);
+
