@@ -8,6 +8,8 @@ public interface IAlumnoService {
 	
 	List<AlumnoDTO> getAlumnos();
 	
+	void agregarMateria(Integer lu,  Integer codigo);
+	
 	AlumnoDTO buscarAlumno(Integer lu);
 	
 	void agregarMateria(Integer lu , Integer codigo);

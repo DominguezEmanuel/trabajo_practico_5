@@ -23,8 +23,20 @@ public class AlumnoServiceImpl implements IAlumnoService {
 	private MateriaRepository materiaRepository;
 	@Autowired
 	private AlumnoMapper alumnoMapper;
+	@Autowired
+	private MateriaRepository materiaRepository;
 	
 	
+	@Override
+	public void agregarMateria(Integer lu,  Integer codigo) {
+		Alumno alumno = alumnoRepository.findById(lu).get();
+		Materia materia = materiaRepository.findById(codigo).get();
+		alumno.getMaterias().add(materia);
+		alumnoRepository.save(alumno);
+	}
+	
+	
+
 	@Override
 	public List<AlumnoDTO> getAlumnos() {
 		List<AlumnoDTO> alumnosDTO = alumnoMapper.toAlumnoDTOList(alumnoRepository.findAll());
