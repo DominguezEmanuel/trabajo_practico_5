@@ -22,6 +22,7 @@ public class ConsultaAlumnosCarrerasController {
 	@GetMapping("/alumnos")
 	public String getConsultaPage(Model model, @RequestParam(required = false)Integer carreraCodigo) {
 		model.addAttribute("carreras", carreraService.getCarreras());
+	    model.addAttribute("carreraSeleccionada", "(Seleccione una carrera)");
 		model.addAttribute("titulo", "Consulta de Alumnos");
 		model.addAttribute("exito", false);
 		model.addAttribute("mensaje", "");
