@@ -17,59 +17,73 @@
 				<div>
 					<form data-th-action="${edicion}?@{/alumno/modificar} : @{/alumno/guardar}" th:object="${alumno}" method="post">
 						
-						<div class="row mb-3 justify-content-center">
+						<!--<div class="row mb-3 justify-content-center">
 							<label for="lu" class="col-sm-6 col-lg-2 col-form-label text-lg-end bg-warning text-dark rounded-pill">LU</label>
 							<div class="col-sm-6 col-lg-4">
 								<input type="hidden" class="form-control" id="lu" th:field="*{lu}" th:if="${edicion}">
 							</div>
-						</div>
+						</div>-->
 						
 						<div class="row mb-3 justify-content-center">
 							<label for="dni" class="col-sm-6 col-lg-2 col-form-label text-lg-end bg-warning text-dark rounded-pill">DNI</label>
 							<div class="col-sm-6 col-lg-4">
-								<input type="number" class="form-control" id="dni" th:field="*{dni}" required>
+								<input type="number" class="form-control" id="dni" th:field="*{dni}" placeholder="Ingrese DNI"
+								th:classappend="${#fields.hasErrors('dni')} ? 'is-invalid' : ' '">
+								<p class="form-text text-danger" th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}"></p>
 							</div>
 						</div>
 						
 						<div class="row mb-3 justify-content-center">
 							<label for="nombre" class="col-sm-6 col-lg-2 col-form-label text-lg-end bg-warning text-dark rounded-pill">Nombre</label>
 							<div class="col-sm-6 col-lg-4">
-								<input type="text" class="form-control" id="nombre" th:field="*{nombre}" required>
+								<input type="text" class="form-control" id="nombre" th:field="*{nombre}" placeholder="Ingrese nombre/s" 
+								th:classappend="${#fields.hasErrors('nombre')} ? 'is-invalid' : ' '">
+								<p class="form-text text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></p>
 							</div>
 						</div>
 						
 						<div class="row mb-3 justify-content-center">
 							<label for="apellido" class="col-sm-6 col-lg-2 col-form-label text-lg-end bg-warning text-dark rounded-pill">Apellido</label>
 							<div class="col-sm-6 col-lg-4">
-								<input type="text" class="form-control" id="apellido" th:field="*{apellido}" required>
+								<input type="text" class="form-control" id="apellido" th:field="*{apellido}" placeholder="Ingrese apellido/s"
+								th:classappend="${#fields.hasErrors('apellido')} ? 'is-invalid' : ' '">
+								<p class="form-text text-danger" th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"></p>
 							</div>
 						</div>
 						
 						<div class="row mb-3 justify-content-center">
 							<label for="email" class="col-sm-6 col-lg-2 col-form-label text-lg-end bg-warning text-dark rounded-pill">Email</label>
 							<div class="col-sm-6 col-lg-4">
-								<input type="email" class="form-control" id="email" th:field="*{email}">
+								<input type="email" class="form-control" id="email" th:field="*{email}" placeholder="Ingrese email"
+								th:classappend="${#fields.hasErrors('email')} ? 'is-invalid' : ' '">
+								<p class="form-text text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
 							</div>
 						</div>
 						
 						<div class="row mb-3 justify-content-center">
 							<label for="telefono" class="col-sm-6 col-lg-2 col-form-label text-lg-end bg-warning text-dark rounded-pill">Teléfono</label>
 							<div class="col-sm-6 col-lg-4">
-								<input type="text" class="form-control" id="telefono" th:field="*{telefono}">
+								<input type="text" class="form-control" id="telefono" th:field="*{telefono}" placeholder="Ingrese teléfono"
+								th:classappend="${#fields.hasErrors('telefono')} ? 'is-invalid' : ' '">
+								<p class="form-text text-danger" th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></p>
 							</div>
 						</div>
 						
 						<div class="row mb-3 justify-content-center">
 							<label for="fechaNacimiento" class="col-sm-6 col-lg-2 col-form-label text-lg-end bg-warning text-dark rounded-pill">Fecha de Nacimiento</label>
 							<div class="col-sm-6 col-lg-4">
-								<input type="date" class="form-control" id="fechaNacimiento" th:field="*{fechaNacimiento}" required>
+								<input type="date" class="form-control" id="fechaNacimiento" th:field="*{fechaNacimiento}" placeholder="Ingrese fecha"
+								th:classappend="${#fields.hasErrors('fechaNacimiento')} ? 'is-invalid' : ' '">
+								<p class="form-text text-danger" th:if="${#fields.hasErrors('fechaNacimiento')}" th:errors="*{fechaNacimiento}"></p>
 							</div>
 						</div>
 							
 						<div class="row mb-3 justify-content-center">
 							<label for="domicilio" class="col-sm-6 col-lg-2 col-form-label text-lg-end bg-warning text-dark rounded-pill">Domicilio</label>
 							<div class="col-sm-6 col-lg-4">
-								<input type="text" class="form-control" id="domicilio" th:field="*{domicilio}" required>
+								<input type="text" class="form-control" id="domicilio" th:field="*{domicilio}" placeholder="Ingrese domicilio"
+								th:classappend="${#fields.hasErrors('domicilio')} ? 'is-invalid' : ' '">
+								<p class="form-text text-danger" th:if="${#fields.hasErrors('domicilio')}" th:errors="*{domicilio}"></p>
 							</div>
 						</div>
 						
