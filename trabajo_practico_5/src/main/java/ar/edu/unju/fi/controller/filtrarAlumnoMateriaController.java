@@ -25,6 +25,7 @@ public class filtrarAlumnoMateriaController {
 	public String getConsultaPage(Model model, @RequestParam(required = false) Integer materiaCodigo) {
 		model.addAttribute("materias", materiaService.getMaterias());
 		model.addAttribute("titulo", "Filtrado de alumnos");
+	    model.addAttribute("materiaSeleccionada", "(Seleccione una materia)");
 		model.addAttribute("exito", false);
 		model.addAttribute("mensaje", "");
 		return "filtrarAlumnosMateria";
