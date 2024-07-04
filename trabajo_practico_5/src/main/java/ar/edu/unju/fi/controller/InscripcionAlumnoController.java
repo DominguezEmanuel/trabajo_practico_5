@@ -36,12 +36,17 @@ public class InscripcionAlumnoController {
 	public String inscripcionAMateriasPage(Model model , @RequestParam Integer materiaCodigo , @RequestParam Integer alumnoLu) {
 		Boolean inscripto = false;
 		String mensaje = "";
-		try {
-			alumnoService.agregarMateria(alumnoLu, materiaCodigo);
-			mensaje = "Alumno inscripto correctamente";
-			inscripto = true;
-		}catch(Exception e) {
-			mensaje = "Ha ocurrido un pronlema durante la inscripción";
+		Boolean alumnoRepetido = alumnoService.buscarRepetidos(alumnoLu, materiaCodigo);
+		if(alumnoRepetido == true) {
+			mensaje = "El alumno ya se encuentra inscripto en la materia"; 
+		}else {
+			try {
+				alumnoService.agregarMateria(alumnoLu, materiaCodigo);
+				mensaje = "Alumno inscripto correctamente";
+				inscripto = true;
+			}catch(Exception e) {
+				mensaje = "Ha ocurrido un pronlema durante la inscripción";
+			}
 		}
 		model.addAttribute("materias" , materiaService.getMaterias());
 		model.addAttribute("alumnos" , alumnoService.getAlumnos());

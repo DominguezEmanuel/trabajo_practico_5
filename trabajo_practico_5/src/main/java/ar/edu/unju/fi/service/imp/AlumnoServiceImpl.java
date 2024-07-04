@@ -43,6 +43,21 @@ public class AlumnoServiceImpl implements IAlumnoService {
 	}
 	
 	@Override
+	public Boolean buscarRepetidos(Integer lu , Integer codigo) {
+		Alumno alumno = alumnoRepository.findById(lu).get();
+		Materia materia = materiaRepository.findById(codigo).get();
+		Boolean alumnoRepetido = false;
+		
+		for(int i = 0 ; i < materia.getAlumnos().size() ; i++) {
+			if(alumno.getLu() == materia.getAlumnos().get(i).getLu()) {
+				alumnoRepetido = true;
+			}
+		}
+		
+		return alumnoRepetido;
+	}
+	
+	@Override
 	public AlumnoDTO buscarAlumno(Integer lu) {
 		AlumnoDTO alumnoDTO = alumnoMapper.toAlumnoDTO(alumnoRepository.findById(lu).get());
 		return alumnoDTO;

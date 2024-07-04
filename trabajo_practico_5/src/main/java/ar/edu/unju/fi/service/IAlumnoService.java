@@ -18,5 +18,5 @@ public interface IAlumnoService {
 	
 	void modificarAlumno(AlumnoDTO alumnoDTO) throws Exception;
 	
-	
+	Boolean buscarRepetidos(Integer lu , Integer codigo);
 }
