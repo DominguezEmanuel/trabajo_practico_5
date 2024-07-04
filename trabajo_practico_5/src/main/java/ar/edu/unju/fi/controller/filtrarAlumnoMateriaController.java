@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import ar.edu.unju.fi.service.IAlumnoService;
-import ar.edu.unju.fi.service.ICarreraService;
 import ar.edu.unju.fi.service.IMateriaService;
 
 @Controller

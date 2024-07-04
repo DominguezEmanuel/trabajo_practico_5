@@ -47,7 +47,7 @@ public class DocenteController {
 		String mensaje;
 		Boolean exito = docenteService.agregarDocente(docenteDTO);
 		if (exito) {
-			mensaje = "Docente guardado éxito!";
+			mensaje = "Docente guardado con éxito!";
 		}else {
 			mensaje = "El docente no se pudo guardar";
 		}

@@ -48,7 +48,6 @@ public class CarreraController {
 		String mensaje;
 		carreraDTO.setEstado("true");
 		Boolean exito = carreraService.agregarCarrera(carreraDTO);
-		//Boolean exito = false; para probar la alerta en caso de exito = false
 		if (exito) {
 			mensaje = "Carrera guardada con éxito!";
 		}else {

@@ -8,11 +8,11 @@
 		
 		<div class="container mb-3">
 			<div class="row py-5 bg-dark rounded-4">
-				<h2 class="text-white text-center mb-3">Filtrado de alumno por materia</h2>
+				<h2 class="text-white text-center mb-3">Filtrado de Alumnos por Materia</h2>
 				<form data-th-action="@{/filtrar/buscar}" method="post">
 					<div class="row mb-3 justify-content-center"> 
 						<label for="materia"
-						class="col-sm-6 col-lg-2 col-form-label text-lg-end bg-warning text-dark rounded-pill">Seleccione materia</label>
+						class="col-sm-6 col-lg-2 col-form-label text-lg-end bg-warning text-dark rounded-pill">Seleccione una Materia</label>
 						<div class="col-sm-6 col-lg-4">
 							<select id="materia" name="materiaCodigo" class="form-control">
 								<option data-th-each="m : ${materias}" th:value="${m.codigo}"
@@ -34,7 +34,7 @@
 									<p class="card-text">
 										<strong>LU: </strong> <span th:text="${a.lu}"></span><br>
 										<strong>Email: </strong> <span th:text="${a.email}"></span><br>
-										<strong>Telefono: </strong> <span th:text="${a.telefono}"></span><br>
+										<strong>Teléfono: </strong> <span th:text="${a.telefono}"></span><br>
 									</p>
 								</div>
 							</div>
