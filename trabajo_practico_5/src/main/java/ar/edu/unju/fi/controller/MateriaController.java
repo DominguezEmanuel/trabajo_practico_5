@@ -127,7 +127,7 @@ public class MateriaController {
 	@GetMapping("/alumno")
 	public String mostrarAlumnosMateriaPage(Model model) {
 		model.addAttribute("titulo", "Filtrar Alumnos de una carrera");
-		model.addAttribute("materias", carreraService.getCarreras());
+		model.addAttribute("materias", materiaService.getMaterias());
 		model.addAttribute("alumnos", alumnoService.getAlumnos());
 		return "filtrarAlumnosMateria";
 	}
