@@ -18,24 +18,27 @@
 				</div>
 				<div>
 					<form data-th-action="${edicion}?@{/carrera/modificar} : @{/carrera/guardar}" th:object="${carrera}" method="post">
-						<div class="row mb-3 justify-content-center">
+						<!--<div class="row mb-3 justify-content-center">
 							<label for="codigo" class="col-sm-6 col-lg-2 col-form-label text-lg-end bg-warning text-dark rounded-pill">Código</label>
 							<div class="col-sm-6 col-lg-4">
 								<input type="hidden" class="form-control" id="codigo" th:field="*{codigo}" th:if="${edicion}">
 							</div>
-						</div>
+						</div>-->
 						
 						<div class="row mb-3 justify-content-center">
 							<label for="nombre" class="col-sm-6 col-lg-2 col-form-label text-lg-end bg-warning text-dark rounded-pill">Nombre</label>
 							<div class="col-sm-6 col-lg-4">
-								<input type="text" class="form-control" id="nombre" th:field="*{nombre}">
+								<input type="text" class="form-control" id="nombre" th:field="*{nombre}" placeholder="Ingrese nombre"
+								th:classappend="${#fields.hasErrors('nombre')} ? 'is-invalid' : ' ' ">
+								<p class="form-text text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></p>
 							</div>
 						</div>
 						
 						<div class="row mb-3 justify-content-center">
 							<label for="duracion" class="col-sm-6 col-lg-2 col-form-label text-lg-end bg-warning text-dark rounded-pill">Duración</label>
 							<div class="col-sm-6 col-lg-4">
-								<input type="number" class="form-control" id="duracion" th:field="*{cantidadAnios}">
+								<input type="number" class="form-control" id="duracion" th:field="*{cantidadAnios}" placeholder="Ingrese duración">
+								<p class="form-text text-danger" th:if="${#fields.hasErrors('cantidadAnios')}" th:errors="*{cantidadAnios}"></p>
 							</div>
 						</div>
 						
@@ -46,6 +49,8 @@
 								<label class="form-check-label" for="radioActiva">Activa</label>
 								<input class="form-check-input" type="radio" th:field="*{estado}" value="false" name="radioInactiva" id="radioInactiva">
 								<label class="form-check-label" for="radioInactiva">Inactiva</label>
+					        <p class="form-text text-danger" th:if="${#fields.hasErrors('estado')}" th:errors="*{estado}"></p>
+
 							</div>
 						</div>
 						

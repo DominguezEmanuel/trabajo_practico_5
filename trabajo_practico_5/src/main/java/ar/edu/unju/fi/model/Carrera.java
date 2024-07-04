@@ -12,6 +12,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,11 +35,14 @@ public class Carrera {
 	@Column(name = "Codigo_carrera")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int codigo;
+	
 	@NonNull
 	@Column(name = "Nombre" , nullable = false)
 	private String nombre;
+	
 	@Column(name = "Cantidad_anos" , nullable = false)
 	private byte cantidadAnios;
+	
 	@NonNull
 	@Column(name = "Estado" , nullable = false)
 	private Boolean estado;

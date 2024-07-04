@@ -36,14 +36,18 @@ public class Materia {
 	@Column(name = "Codigo_materia")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int codigo;
+	
 	@NonNull
 	@Column(name = "Nombre" , nullable = false)
 	private String nombre;
+	
 	@NonNull
 	@Column(name = "Curso" , nullable = false)
 	private String curso;
+	
 	@Column(name = "Cantidad_horas" , nullable = false)
 	private byte cantidadHoras;
+	
 	@NonNull
 	@Column(name = "Modalidad" , nullable = false)
 	private String modalidad;
