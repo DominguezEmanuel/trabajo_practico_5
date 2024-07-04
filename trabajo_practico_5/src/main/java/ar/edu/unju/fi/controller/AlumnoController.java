@@ -50,6 +50,8 @@ public class AlumnoController {
 		
 		if(result.hasErrors()) {
 			modelView = new ModelAndView("alumno");
+			modelView.addObject("alumno", alumnoDTO);
+			modelView.addObject("titulo","Nuevo Alumno");
 		}else {
 			modelView = new ModelAndView("alumnos");
 			Boolean exito = alumnoService.agregarAlumno(alumnoDTO);

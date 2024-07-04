@@ -15,22 +15,21 @@
 				<h3 data-th-text="${edicion}?'Modificar Docente':'Nuevo Docente'" class="text-center text-white"></h3>
 			</div>
 			<div>
-				<form data-th-action="${edicion}?@{/docente/modificar} : @{/docente/guardar}" th:object="${docente}"
-					method="post">
+				<form data-th-action="${edicion}?@{/docente/modificar} : @{/docente/guardar}" th:object="${docente}" method="post">
 
-					<div class="row mb-3 justify-content-center">
+	       <!--<div class="row mb-3 justify-content-center">
 						<label for="legajo"
 							class="col-sm-6 col-lg-2 col-form-label text-lg-end bg-warning text-dark rounded-pill">Legajo</label>
 						<div class="col-sm-6 col-lg-4">
-							<input type="hidden" class="form-control" id="legajo" th:field="*{legajo}" th:if="${edicion}">
+							<input type="hidden" class="form-control" id="legajo" th:field="*{legajo}">
 						</div>
-					</div>
+					</div> -->
 
 					<div class="row mb-3 justify-content-center">
-						<label for="nombre"
-							class="col-sm-6 col-lg-2 col-form-label text-lg-end bg-warning text-dark rounded-pill">Nombre</label>
+						<label for="nombre" class="col-sm-6 col-lg-2 col-form-label text-lg-end bg-warning text-dark rounded-pill">Nombre</label>
 						<div class="col-sm-6 col-lg-4">
-							<input type="text" class="form-control" id="nombre" th:field="*{nombre}" required>
+							<input type="text" class="form-control" id="nombre" th:field="*{nombre}" placeholder="Ingrese nombre">
+							<p class="form-text text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></p>
 						</div>
 					</div>
 
@@ -38,7 +37,8 @@
 						<label for="apellido"
 							class="col-sm-6 col-lg-2 col-form-label text-lg-end bg-warning text-dark rounded-pill">Apellido</label>
 						<div class="col-sm-6 col-lg-4">
-							<input type="text" class="form-control" id="apellido" th:field="*{apellido}" required>
+							<input type="text" class="form-control" id="apellido" th:field="*{apellido}" placeholder="Ingrese apellido">
+							<p class="form-text text-danger" th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"></p>
 						</div>
 					</div>
 
@@ -46,7 +46,11 @@
 						<label for="email"
 							class="col-sm-6 col-lg-2 col-form-label text-lg-end bg-warning text-dark rounded-pill">Email</label>
 						<div class="col-sm-6 col-lg-4">
-							<input type="email" class="form-control" id="email" th:field="*{email}">
+							<input type="email" class="form-control" id="email" th:field="*{email}"
+								placeholder="Ingrese email">
+							<p class="form-text text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
+							</p>
+
 						</div>
 					</div>
 
@@ -54,7 +58,9 @@
 						<label for="telefono"
 							class="col-sm-6 col-lg-2 col-form-label text-lg-end bg-warning text-dark rounded-pill">Teléfono</label>
 						<div class="col-sm-6 col-lg-4">
-							<input type="text" class="form-control" id="telefono" th:field="*{telefono}">
+							<input type="text" class="form-control" id="telefono" th:field="*{telefono}"
+								placeholder="Ingrese teléfono">
+							<p class="form-text text-danger" th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></p>
 						</div>
 					</div>
 

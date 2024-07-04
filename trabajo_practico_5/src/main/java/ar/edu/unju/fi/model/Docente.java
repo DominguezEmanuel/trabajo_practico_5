@@ -27,19 +27,23 @@ public class Docente {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "Legajo" , nullable = false)
+	@Column(name = "Legajo")
 	private Integer legajo;
+	
 	@NonNull
-	@Column(name = "Nombre" , nullable = false)
+	@Column(name = "Nombre")
 	private String nombre;
+	
 	@NonNull
-	@Column(name = "Apellido" , nullable = false)
+	@Column(name = "Apellido")
 	private String apellido;
+	
 	@NonNull
-	@Column(name = "Email" , nullable = false)
+	@Column(name = "Email")
 	private String email;
+	
 	@NonNull
-	@Column(name = "Telefono" , nullable = false)
+	@Column(name = "Telefono")
 	private String telefono;
 	
 	@OneToOne(mappedBy="docente")

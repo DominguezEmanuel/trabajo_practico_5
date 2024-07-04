@@ -2,6 +2,8 @@ package ar.edu.unju.fi.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,8 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.dto.CarreraDTO;
 import ar.edu.unju.fi.service.ICarreraService;
-
-import org.springframework.ui.Model;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/carrera")
@@ -43,8 +44,14 @@ public class CarreraController {
 	}
 	
 	@PostMapping("/guardar")
-	public ModelAndView guardarCarrera(@ModelAttribute("carrera") CarreraDTO carreraDTO) {
-		ModelAndView modelView = new ModelAndView("carreras");
+	public ModelAndView guardarCarrera(@Valid @ModelAttribute("carrera") CarreraDTO carreraDTO, BindingResult result) {
+		ModelAndView modelView;
+		if(result.hasErrors()) {
+			modelView = new ModelAndView("carrera");
+			modelView.addObject("carrera", carreraDTO);
+			modelView.addObject("titulo","Nueva Carrera");
+		}else {
+			modelView = new ModelAndView("carreras");
 		String mensaje;
 		carreraDTO.setEstado("true");
 		Boolean exito = carreraService.agregarCarrera(carreraDTO);
@@ -56,6 +63,7 @@ public class CarreraController {
 		modelView.addObject("exito", exito);
 		modelView.addObject("mensaje", mensaje);
 		modelView.addObject("carreras", carreraService.getCarreras());
+		}
 		return modelView;
 	}
 	

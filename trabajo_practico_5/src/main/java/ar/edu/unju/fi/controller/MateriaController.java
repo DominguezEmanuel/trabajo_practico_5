@@ -2,6 +2,8 @@ package ar.edu.unju.fi.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,8 +18,7 @@ import ar.edu.unju.fi.service.IAlumnoService;
 import ar.edu.unju.fi.service.ICarreraService;
 import ar.edu.unju.fi.service.IDocenteService;
 import ar.edu.unju.fi.service.IMateriaService;
-
-import org.springframework.ui.Model;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/materia")
@@ -65,8 +66,15 @@ public class MateriaController {
 	}
 	
 	@PostMapping("/guardar")
-	public ModelAndView guardarMateria(@ModelAttribute("materia") MateriaDTO materiaDTO) {
-		ModelAndView modelView = new ModelAndView("materias");
+	public ModelAndView guardarMateria( @Valid @ModelAttribute("materia") MateriaDTO materiaDTO, BindingResult result) {
+		ModelAndView modelView;
+		if(result.hasErrors()) {
+			modelView = new ModelAndView("materia");
+			modelView.addObject("materia",materiaDTO);
+			modelView.addObject("titulo","Nueva Materia");
+		}else {
+			
+		 modelView = new ModelAndView("materias");
 		String mensaje = "";
 		carreraDTO = carreraService.buscarCarrera(materiaDTO.getCarrera().getCodigo());
 		docenteDTO = docenteService.buscarDocente(materiaDTO.getDocente().getLegajo());
@@ -81,6 +89,7 @@ public class MateriaController {
 		modelView.addObject("exito", exito);
 		modelView.addObject("mensaje", mensaje);
 		modelView.addObject("materias", materiaService.getMaterias());
+		}
 		return modelView;
 	}
 	
