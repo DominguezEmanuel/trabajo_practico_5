@@ -1,6 +1,7 @@
 package ar.edu.unju.fi.service.imp;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -61,8 +62,15 @@ public class AlumnoServiceImpl implements IAlumnoService {
 
 	@Override
 	public void eliminarAlumno(Integer lu) {
-		Alumno alumno = alumnoRepository.findById(lu).get();
-		alumnoRepository.delete(alumno);
+		 Optional<Alumno> alumnoOpt = alumnoRepository.findById(lu);
+	        if (alumnoOpt.isPresent()) {
+	            Alumno alumno = alumnoOpt.get();
+	            for (Materia materia : alumno.getMaterias()) {
+	                materia.getAlumnos().remove(alumno);
+	                materiaRepository.save(materia);  // Actualizar la materia en la base de datos
+	            }
+	            alumnoRepository.delete(alumno);
+	        }
 	}
 
 	@Override

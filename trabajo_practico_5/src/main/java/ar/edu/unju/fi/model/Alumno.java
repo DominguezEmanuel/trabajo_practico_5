@@ -66,4 +66,5 @@ public class Alumno {
 	@JoinColumn(name="Codigo_carrera")
 	private Carrera carreraAlumno;
 	
+	
 }

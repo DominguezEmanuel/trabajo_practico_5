@@ -25,9 +25,6 @@ public class AlumnoController {
 	@Autowired
 	private IAlumnoService alumnoService;
 	
-	@Autowired
-	private ICarreraService carreraService;
-	
 	@GetMapping("/listado")
 	public String getAlumnosPage(Model model) {
 		model.addAttribute("alumnos", alumnoService.getAlumnos());
