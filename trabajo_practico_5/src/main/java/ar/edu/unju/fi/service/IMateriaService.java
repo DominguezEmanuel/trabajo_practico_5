@@ -2,6 +2,7 @@ package ar.edu.unju.fi.service;
 
 import java.util.List;
 
+import ar.edu.unju.fi.dto.AlumnoDTO;
 import ar.edu.unju.fi.dto.MateriaDTO;
 
 public interface IMateriaService {
@@ -15,4 +16,6 @@ public interface IMateriaService {
 	void eliminarMateria(int codigo);
 	
 	void modificarMateria(MateriaDTO materiaDTO) throws Exception;
+	
+	public List<AlumnoDTO> getAlumnosMateria(int codigo);
 }

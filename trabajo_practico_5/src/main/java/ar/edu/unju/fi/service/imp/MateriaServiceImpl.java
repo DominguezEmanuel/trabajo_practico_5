@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ar.edu.unju.fi.dto.AlumnoDTO;
 import ar.edu.unju.fi.dto.MateriaDTO;
+import ar.edu.unju.fi.mapper.AlumnoMapper;
 import ar.edu.unju.fi.mapper.MateriaMapper;
 import ar.edu.unju.fi.model.Materia;
 import ar.edu.unju.fi.repository.MateriaRepository;
@@ -18,6 +20,8 @@ public class MateriaServiceImpl implements IMateriaService{
 	private MateriaRepository materiaRepository;
 	@Autowired
 	private MateriaMapper materiaMapper;
+	@Autowired
+	private AlumnoMapper alumnoMapper;
 	
 	@Override
 	public List<MateriaDTO> getMaterias() {
@@ -52,5 +56,12 @@ public class MateriaServiceImpl implements IMateriaService{
 	@Override
 	public void modificarMateria(MateriaDTO materiaDTO) throws Exception {
 		materiaRepository.save(materiaMapper.toMateria(materiaDTO));
+	}
+	
+	@Override
+	public List<AlumnoDTO> getAlumnosMateria(int codigo) {
+		Materia materia = materiaRepository.findById(codigo).get();
+		List<AlumnoDTO> alumnos = alumnoMapper.toAlumnoDTOList(materia.getAlumnos());
+		return alumnos;
 	}
 }
