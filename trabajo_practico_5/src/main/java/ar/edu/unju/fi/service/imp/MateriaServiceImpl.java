@@ -16,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service("materiaServiceMySQL")
-public class MateriaServiceImpl implements IMateriaService{
+public class MateriaServiceImpl implements IMateriaService {
 
 	@Autowired
 	private MateriaRepository materiaRepository;
@@ -24,7 +24,7 @@ public class MateriaServiceImpl implements IMateriaService{
 	private MateriaMapper materiaMapper;
 	@Autowired
 	private AlumnoMapper alumnoMapper;
-	
+
 	@Override
 	public List<MateriaDTO> getMaterias() {
 		List<MateriaDTO> materiasDTO = materiaMapper.toMateriaDTOList(materiaRepository.findAll());
@@ -34,6 +34,7 @@ public class MateriaServiceImpl implements IMateriaService{
 	@Override
 	public MateriaDTO buscarMateria(int codigo) {
 		MateriaDTO materiaDTO = materiaMapper.toMateriaDTO(materiaRepository.findById(codigo).get());
+		log.info("Materia encontrada");
 		return materiaDTO;
 	}
 
@@ -41,12 +42,13 @@ public class MateriaServiceImpl implements IMateriaService{
 	public Boolean agregarMateria(MateriaDTO materiaDTO) {
 		Boolean respuesta;
 		Materia materia = materiaRepository.save(materiaMapper.toMateria(materiaDTO));
-		if(materia != null) {
+		if (materia != null) {
 			respuesta = true;
-		}else {
+			log.info("Materia agregada");
+		} else {
 			respuesta = false;
+			log.error("No se pudo agregar la materia");
 		}
-		log.info("Materia agregada");
 		return respuesta;
 	}
 
@@ -54,14 +56,15 @@ public class MateriaServiceImpl implements IMateriaService{
 	public void eliminarMateria(int codigo) {
 		Materia materia = materiaRepository.findById(codigo).get();
 		materiaRepository.delete(materia);
-		log.error("Materia eliminada");
+		log.info("Materia eliminada");
 	}
 
 	@Override
 	public void modificarMateria(MateriaDTO materiaDTO) throws Exception {
 		materiaRepository.save(materiaMapper.toMateria(materiaDTO));
+		log.info("Materia modificada");
 	}
-	
+
 	@Override
 	public List<AlumnoDTO> getAlumnosMateria(int codigo) {
 		Materia materia = materiaRepository.findById(codigo).get();

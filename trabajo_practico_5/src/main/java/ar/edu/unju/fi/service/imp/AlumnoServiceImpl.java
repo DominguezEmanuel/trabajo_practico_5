@@ -6,9 +6,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mysql.cj.log.Log;
-import com.mysql.cj.log.LogFactory;
-
 import ar.edu.unju.fi.dto.AlumnoDTO;
 import ar.edu.unju.fi.mapper.AlumnoMapper;
 import ar.edu.unju.fi.model.Alumno;
@@ -45,7 +42,7 @@ public class AlumnoServiceImpl implements IAlumnoService {
 		alumnoRepository.save(alumno);
 		materia.getAlumnos().add(alumno);
 		materiaRepository.save(materia);
-		
+		log.info("Materia Guardada");
 	}
 	
 	@Override
@@ -66,6 +63,7 @@ public class AlumnoServiceImpl implements IAlumnoService {
 	@Override
 	public AlumnoDTO buscarAlumno(Integer lu) {
 		AlumnoDTO alumnoDTO = alumnoMapper.toAlumnoDTO(alumnoRepository.findById(lu).get());
+		log.info("Alumno encontrado");
 		return alumnoDTO;
 	}
 	
@@ -75,10 +73,12 @@ public class AlumnoServiceImpl implements IAlumnoService {
 		Alumno alumno = alumnoRepository.save(alumnoMapper.toAlumno(alumnoDTO));
 		if(alumno != null ) {
 			respuesta = true;
+			log.info("Alumno agregado");
 		}else {
 			respuesta = false;
+			log.error("No se agregó el alumno");
 		}
-		log.info("Alumno agregado");
+
 		return respuesta;
 	}
 
@@ -93,12 +93,13 @@ public class AlumnoServiceImpl implements IAlumnoService {
 	            }
 	            alumnoRepository.delete(alumno);
 	        }
-	        log.error("Alumno eliminado");
+	        log.info("Alumno eliminado");
 	}
 
 	@Override
 	public void modificarAlumno(AlumnoDTO alumnoDTO) throws Exception {
 		alumnoRepository.save(alumnoMapper.toAlumno(alumnoDTO));
+		log.info("Alumno modificado");
 	}
 
 }
