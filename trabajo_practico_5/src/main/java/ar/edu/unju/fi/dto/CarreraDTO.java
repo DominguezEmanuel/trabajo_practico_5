@@ -19,7 +19,6 @@ public class CarreraDTO {
 	private String nombre;
 	@Min(value=3,message="Debe tener 3 años como mínimo")
 	private byte cantidadAnios;
-	@NotEmpty(message = "El campo estado no puede ser nulo")
 	private String estado;
 	
 }

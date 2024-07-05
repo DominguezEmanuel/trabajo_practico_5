@@ -18,14 +18,14 @@
 				<form data-th-action="${edicion}?@{/materia/modificar} : @{/materia/guardar}" th:object="${materia}"
 					method="post">
 
-					<!--<div class="row mb-3 justify-content-center">
+					<div class="row mb-3 justify-content-center">
 						<label for="codigo"
 							class="col-sm-6 col-lg-2 col-form-label text-lg-end bg-warning text-dark rounded-pill">Código</label>
 						<div class="col-sm-6 col-lg-4">
 							<input type="hidden" class="form-control" id="codigo" th:field="*{codigo}"
 								th:if="${edicion}">
 						</div>
-					</div> -->
+					</div> 
 
 					<div class="row mb-3 justify-content-center">
 						<label for="nombre" class="col-sm-6 col-lg-2 col-form-label text-lg-end bg-warning text-dark rounded-pill">Nombre</label>

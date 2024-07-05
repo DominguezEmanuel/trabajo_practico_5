@@ -68,7 +68,8 @@ public class CarreraServiceImpl implements ICarreraService{
 
 	@Override
 	public void modificarCarrera(CarreraDTO carreraDTO) throws Exception {
-		carreraRepository.save(carreraMapper.toCarrera(carreraDTO));
+		Carrera carreraNueva = carreraMapper.toCarrera(carreraDTO);
+		carreraRepository.save(carreraNueva);
 		log.info("carrera modificada");
 	}
 	

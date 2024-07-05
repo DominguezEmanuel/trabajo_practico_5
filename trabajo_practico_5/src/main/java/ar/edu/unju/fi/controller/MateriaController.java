@@ -14,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 import ar.edu.unju.fi.dto.CarreraDTO;
 import ar.edu.unju.fi.dto.DocenteDTO;
 import ar.edu.unju.fi.dto.MateriaDTO;
-import ar.edu.unju.fi.service.IAlumnoService;
 import ar.edu.unju.fi.service.ICarreraService;
 import ar.edu.unju.fi.service.IDocenteService;
 import ar.edu.unju.fi.service.IMateriaService;
@@ -41,9 +40,7 @@ public class MateriaController {
 	
 	@Autowired
 	private ICarreraService carreraService;
-	
-	@Autowired
-	private IAlumnoService alumnoService;
+
 	
 	@GetMapping("/listado")
 	public String getMateriaPage(Model model) {
@@ -71,6 +68,8 @@ public class MateriaController {
 		if(result.hasErrors()) {
 			modelView = new ModelAndView("materia");
 			modelView.addObject("materia",materiaDTO);
+			modelView.addObject("docentes", docenteService.getDocentes());
+			modelView.addObject("carreras", carreraService.getCarreras());
 			modelView.addObject("titulo","Nueva Materia");
 		}else {
 			modelView = new ModelAndView("materias");
