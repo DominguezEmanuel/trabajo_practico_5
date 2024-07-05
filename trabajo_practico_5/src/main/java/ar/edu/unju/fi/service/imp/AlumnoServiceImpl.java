@@ -6,6 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mysql.cj.log.Log;
+import com.mysql.cj.log.LogFactory;
+
 import ar.edu.unju.fi.dto.AlumnoDTO;
 import ar.edu.unju.fi.mapper.AlumnoMapper;
 import ar.edu.unju.fi.model.Alumno;
@@ -13,7 +16,9 @@ import ar.edu.unju.fi.model.Materia;
 import ar.edu.unju.fi.repository.AlumnoRepository;
 import ar.edu.unju.fi.repository.MateriaRepository;
 import ar.edu.unju.fi.service.IAlumnoService;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service("alumnoServiceMySQL")
 public class AlumnoServiceImpl implements IAlumnoService {
 
@@ -40,6 +45,7 @@ public class AlumnoServiceImpl implements IAlumnoService {
 		alumnoRepository.save(alumno);
 		materia.getAlumnos().add(alumno);
 		materiaRepository.save(materia);
+		log.info("Materia agregada");
 	}
 	
 	@Override

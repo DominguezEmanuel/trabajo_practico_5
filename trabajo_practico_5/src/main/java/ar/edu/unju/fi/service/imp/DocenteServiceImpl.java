@@ -10,7 +10,9 @@ import ar.edu.unju.fi.mapper.DocenteMapper;
 import ar.edu.unju.fi.model.Docente;
 import ar.edu.unju.fi.repository.DocenteRepository;
 import ar.edu.unju.fi.service.IDocenteService;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service("DocenteServiceMySQL")
 public class DocenteServiceImpl implements IDocenteService {
 
@@ -39,6 +41,7 @@ public class DocenteServiceImpl implements IDocenteService {
 		}else {
 			respuesta  = false;
 		}
+		log.info("Docente agregado");
 		return respuesta;
 	}
 

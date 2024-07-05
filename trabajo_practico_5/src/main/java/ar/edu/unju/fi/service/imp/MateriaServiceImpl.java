@@ -12,7 +12,9 @@ import ar.edu.unju.fi.mapper.MateriaMapper;
 import ar.edu.unju.fi.model.Materia;
 import ar.edu.unju.fi.repository.MateriaRepository;
 import ar.edu.unju.fi.service.IMateriaService;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service("materiaServiceMySQL")
 public class MateriaServiceImpl implements IMateriaService{
 
@@ -44,6 +46,7 @@ public class MateriaServiceImpl implements IMateriaService{
 		}else {
 			respuesta = false;
 		}
+		log.info("Materia agregada");
 		return respuesta;
 	}
 

@@ -12,7 +12,9 @@ import ar.edu.unju.fi.mapper.CarreraMapper;
 import ar.edu.unju.fi.model.Carrera;
 import ar.edu.unju.fi.repository.CarreraRepository;
 import ar.edu.unju.fi.service.ICarreraService;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service("carreraServiceMySQL")
 public class CarreraServiceImpl implements ICarreraService{
 
@@ -51,6 +53,7 @@ public class CarreraServiceImpl implements ICarreraService{
 		}else {
 			respuesta = false;
 		}
+		log.info("Carrera Agregadas");
 		return respuesta;
 	}
 

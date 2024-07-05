@@ -124,6 +124,7 @@ public class MateriaController {
 		return "redirect:/materia/listado";
 	}
 	
+	
 	@GetMapping("/alumno")
 	public String mostrarAlumnosMateriaPage(Model model) {
 		model.addAttribute("titulo", "Filtrar Alumnos de una carrera");
