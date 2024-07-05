@@ -73,22 +73,21 @@ public class MateriaController {
 			modelView.addObject("materia",materiaDTO);
 			modelView.addObject("titulo","Nueva Materia");
 		}else {
-			
-		 modelView = new ModelAndView("materias");
-		String mensaje = "";
-		carreraDTO = carreraService.buscarCarrera(materiaDTO.getCarrera().getCodigo());
-		docenteDTO = docenteService.buscarDocente(materiaDTO.getDocente().getLegajo());
-		materiaDTO.setCarrera(carreraDTO);
-		materiaDTO.setDocente(docenteDTO);
-		Boolean exito = materiaService.agregarMateria(materiaDTO);
-		if (exito) {
-			mensaje = "Materia guardada con éxito!";
-		}else {
-			mensaje = "La materia no se pudo guardar";
-		}
-		modelView.addObject("exito", exito);
-		modelView.addObject("mensaje", mensaje);
-		modelView.addObject("materias", materiaService.getMaterias());
+			modelView = new ModelAndView("materias");
+			String mensaje = "";
+			carreraDTO = carreraService.buscarCarrera(materiaDTO.getCarrera().getCodigo());
+			docenteDTO = docenteService.buscarDocente(materiaDTO.getDocente().getLegajo());
+			materiaDTO.setCarrera(carreraDTO);
+			materiaDTO.setDocente(docenteDTO);
+			Boolean exito = materiaService.agregarMateria(materiaDTO);
+			if (exito) {
+				mensaje = "Materia guardada con éxito!";
+			}else {
+				mensaje = "La materia no se pudo guardar";
+			}
+			modelView.addObject("exito", exito);
+			modelView.addObject("mensaje", mensaje);
+			modelView.addObject("materias", materiaService.getMaterias());
 		}
 		return modelView;
 	}

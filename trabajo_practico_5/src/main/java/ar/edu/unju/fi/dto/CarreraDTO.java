@@ -2,8 +2,8 @@ package ar.edu.unju.fi.dto;
 
 import org.springframework.stereotype.Component;
 
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,9 +15,9 @@ import lombok.NoArgsConstructor;
 public class CarreraDTO {
 	
 	private int codigo;
-	@NotEmpty(message = "El campo nombre no puede estar vacío")
+	@NotEmpty(message = "Debe ingresar el nombre de la Carrera")
 	private String nombre;
-	@NotNull(message = "El campo duración no puede estar vacío")
+	@Min(value=3,message="Debe tener 3 años como mínimo")
 	private byte cantidadAnios;
 	@NotEmpty(message = "El campo estado no puede ser nulo")
 	private String estado;

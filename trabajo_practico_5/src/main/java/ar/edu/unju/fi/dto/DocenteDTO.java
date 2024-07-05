@@ -2,7 +2,7 @@ package ar.edu.unju.fi.dto;
 
 import org.springframework.stereotype.Component;
 
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,13 +12,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Component
 public class DocenteDTO {
+	
 	private Integer legajo;
-	@NotEmpty(message = "El campo nombre no puede estar vacío")
+	@NotBlank(message = "Debe ingresar un nombre")
 	private String nombre;
-	@NotEmpty(message = "El campo apellido no puede estar vacío")
+	@NotBlank(message = "Debe ingresar un apellido")
 	private String apellido;
-	@NotEmpty(message = "El campo email no puede estar vacío")
+	@NotBlank(message = "Debe ingresar un email")
 	private String email;
-	@NotEmpty(message = "El campo nombre no puede estar vacío")
+	@NotBlank(message = "Debe ingresar un teléfono")
 	private String telefono;
 }
