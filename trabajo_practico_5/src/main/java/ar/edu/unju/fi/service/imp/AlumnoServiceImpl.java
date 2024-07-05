@@ -13,7 +13,9 @@ import ar.edu.unju.fi.model.Materia;
 import ar.edu.unju.fi.repository.AlumnoRepository;
 import ar.edu.unju.fi.repository.MateriaRepository;
 import ar.edu.unju.fi.service.IAlumnoService;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service("alumnoServiceMySQL")
 public class AlumnoServiceImpl implements IAlumnoService {
 
@@ -40,6 +42,7 @@ public class AlumnoServiceImpl implements IAlumnoService {
 		alumnoRepository.save(alumno);
 		materia.getAlumnos().add(alumno);
 		materiaRepository.save(materia);
+		log.info("Materia Guardada");
 	}
 	
 	@Override
@@ -60,6 +63,7 @@ public class AlumnoServiceImpl implements IAlumnoService {
 	@Override
 	public AlumnoDTO buscarAlumno(Integer lu) {
 		AlumnoDTO alumnoDTO = alumnoMapper.toAlumnoDTO(alumnoRepository.findById(lu).get());
+		log.info("Alumno encontrado");
 		return alumnoDTO;
 	}
 	
@@ -69,9 +73,12 @@ public class AlumnoServiceImpl implements IAlumnoService {
 		Alumno alumno = alumnoRepository.save(alumnoMapper.toAlumno(alumnoDTO));
 		if(alumno != null ) {
 			respuesta = true;
+			log.info("Alumno agregado");
 		}else {
 			respuesta = false;
+			log.error("No se agregó el alumno");
 		}
+
 		return respuesta;
 	}
 
@@ -86,11 +93,13 @@ public class AlumnoServiceImpl implements IAlumnoService {
 	            }
 	            alumnoRepository.delete(alumno);
 	        }
+	        log.info("Alumno eliminado");
 	}
 
 	@Override
 	public void modificarAlumno(AlumnoDTO alumnoDTO) throws Exception {
 		alumnoRepository.save(alumnoMapper.toAlumno(alumnoDTO));
+		log.info("Alumno modificado");
 	}
 
 }

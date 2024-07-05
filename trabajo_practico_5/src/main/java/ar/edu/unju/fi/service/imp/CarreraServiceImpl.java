@@ -12,7 +12,9 @@ import ar.edu.unju.fi.mapper.CarreraMapper;
 import ar.edu.unju.fi.model.Carrera;
 import ar.edu.unju.fi.repository.CarreraRepository;
 import ar.edu.unju.fi.service.ICarreraService;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service("carreraServiceMySQL")
 public class CarreraServiceImpl implements ICarreraService{
 
@@ -39,6 +41,7 @@ public class CarreraServiceImpl implements ICarreraService{
 	@Override
 	public CarreraDTO buscarCarrera(int codigo) {
 		CarreraDTO carreraDTO = carreraMapper.toCarreraDTO(carreraRepository.findById(codigo).get());
+		log.info("Carrera encontrada");
 		return carreraDTO;
 	}
 
@@ -48,8 +51,10 @@ public class CarreraServiceImpl implements ICarreraService{
 		Carrera carrera = carreraRepository.save(carreraMapper.toCarrera(carreraDTO));
 		if(carrera != null) {
 			respuesta = true;
+			log.info("Carrera agregada");
 		}else {
 			respuesta = false;
+			log.error("No se pudo agregar la carrera");
 		}
 		return respuesta;
 	}
@@ -58,11 +63,13 @@ public class CarreraServiceImpl implements ICarreraService{
 	public void eliminarCarrera(int codigo) {
 		Carrera carrera  = carreraRepository.findById(codigo).get();
 		carreraRepository.delete(carrera);
+		log.info("Carrera eliminada");
 	}
 
 	@Override
 	public void modificarCarrera(CarreraDTO carreraDTO) throws Exception {
 		carreraRepository.save(carreraMapper.toCarrera(carreraDTO));
+		log.info("carrera modificada");
 	}
 	
 	

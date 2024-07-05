@@ -10,7 +10,9 @@ import ar.edu.unju.fi.mapper.DocenteMapper;
 import ar.edu.unju.fi.model.Docente;
 import ar.edu.unju.fi.repository.DocenteRepository;
 import ar.edu.unju.fi.service.IDocenteService;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service("DocenteServiceMySQL")
 public class DocenteServiceImpl implements IDocenteService {
 
@@ -27,6 +29,7 @@ public class DocenteServiceImpl implements IDocenteService {
 	@Override
 	public DocenteDTO buscarDocente(Integer legajo) {
 		DocenteDTO docenteDTO = docenteMapper.toDocenteDTO(docenteRepository.findById(legajo).get());
+		log.info("Docente encontrado");
 		return docenteDTO;
 	}
 
@@ -36,8 +39,10 @@ public class DocenteServiceImpl implements IDocenteService {
 		Docente docente = docenteRepository.save(docenteMapper.toDocente(docenteDTO));
 		if(docente != null) {
 			respuesta = true;
+			log.info("Docente agregado");
 		}else {
 			respuesta  = false;
+			log.error("No se pudo agregar al docente");
 		}
 		return respuesta;
 	}
@@ -46,10 +51,12 @@ public class DocenteServiceImpl implements IDocenteService {
 	public void eliminarDocente(Integer legajo) {
 		Docente docente = docenteRepository.findById(legajo).get();
 		docenteRepository.delete(docente);
+		log.info("Docente eliminado");
 	}
 
 	@Override
 	public void modificarDocente(DocenteDTO docenteDTO) throws Exception {
 		docenteRepository.save(docenteMapper.toDocente(docenteDTO));
+		log.info("Docente modificado");
 	}
 }
