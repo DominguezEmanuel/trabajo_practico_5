@@ -61,6 +61,7 @@ public class CarreraServiceImpl implements ICarreraService{
 	public void eliminarCarrera(int codigo) {
 		Carrera carrera  = carreraRepository.findById(codigo).get();
 		carreraRepository.delete(carrera);
+		log.error("Carrera eliminada");
 	}
 
 	@Override

@@ -49,6 +49,7 @@ public class DocenteServiceImpl implements IDocenteService {
 	public void eliminarDocente(Integer legajo) {
 		Docente docente = docenteRepository.findById(legajo).get();
 		docenteRepository.delete(docente);
+		log.error("Docente eliminado");
 	}
 
 	@Override

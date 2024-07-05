@@ -45,7 +45,7 @@ public class AlumnoServiceImpl implements IAlumnoService {
 		alumnoRepository.save(alumno);
 		materia.getAlumnos().add(alumno);
 		materiaRepository.save(materia);
-		log.info("Materia agregada");
+		
 	}
 	
 	@Override
@@ -78,6 +78,7 @@ public class AlumnoServiceImpl implements IAlumnoService {
 		}else {
 			respuesta = false;
 		}
+		log.info("Alumno agregado");
 		return respuesta;
 	}
 
@@ -92,6 +93,7 @@ public class AlumnoServiceImpl implements IAlumnoService {
 	            }
 	            alumnoRepository.delete(alumno);
 	        }
+	        log.error("Alumno eliminado");
 	}
 
 	@Override

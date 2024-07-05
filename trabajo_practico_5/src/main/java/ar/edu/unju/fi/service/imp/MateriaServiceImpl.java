@@ -54,6 +54,7 @@ public class MateriaServiceImpl implements IMateriaService{
 	public void eliminarMateria(int codigo) {
 		Materia materia = materiaRepository.findById(codigo).get();
 		materiaRepository.delete(materia);
+		log.error("Materia eliminada");
 	}
 
 	@Override
