@@ -3,6 +3,7 @@ package ar.edu.unju.fi.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.dto.DocenteDTO;
 import ar.edu.unju.fi.service.IDocenteService;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/docente")
@@ -42,18 +44,26 @@ public class DocenteController {
 	}
 	
 	@PostMapping("/guardar")
-	public ModelAndView guardarDocente(@ModelAttribute("docente") DocenteDTO docenteDTO) {
-		ModelAndView modelView = new ModelAndView("docentes");
+	public ModelAndView guardarDocente(@Valid @ModelAttribute("docente") DocenteDTO docenteDTO, BindingResult result) {
+		ModelAndView modelView ; 
+		if(result.hasErrors()) {
+			modelView = new ModelAndView("docente");
+			modelView.addObject("docente", docenteDTO);
+			modelView.addObject("titulo","Nuevo Docente");
+		}else {
+			
+		modelView= new ModelAndView("docentes");
 		String mensaje;
 		Boolean exito = docenteService.agregarDocente(docenteDTO);
 		if (exito) {
-			mensaje = "Docente guardado éxito!";
+			mensaje = "Docente guardado con éxito!";
 		}else {
 			mensaje = "El docente no se pudo guardar";
 		}
 		modelView.addObject("exito", exito);
 		modelView.addObject("mensaje", mensaje);
 		modelView.addObject("docentes", docenteService.getDocentes());
+		}
 		return modelView;
 	}
 	

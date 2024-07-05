@@ -15,11 +15,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 import lombok.Setter;
 
 @Component
@@ -37,26 +37,29 @@ public class Alumno {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "Lu" , nullable = false)
 	private Integer lu;
+	
 	@Column(name = "Dni_alumno")
+	@NotNull(message = "Debe ingresar su DNI")
 	private int dni;
-	@NonNull
-	@Column(name = "Nombre" , nullable = false)
+	
+	@Column(name = "Nombre")
 	private String nombre;
-	@NonNull
-	@Column(name = "Apellido" , nullable = false)
+	
+	@Column(name = "Apellido")
 	private String apellido;
-	@NonNull
-	@Column(name = "Email" , nullable = false)
+
+	@Column(name = "Email")
 	private String email;
-	@NonNull
-	@Column(name = "Telefono" , nullable = false)
+
+	
+	@Column(name = "Telefono")
 	private String telefono;
-	@NonNull
-	@Column(name = "Fecha_nacimiento" , nullable = false)
+
+	@Column(name = "Fecha_nacimiento")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate fechaNacimiento;
-	@NonNull
-	@Column(name = "Domicilio" , nullable = false)
+
+	@Column(name = "Domicilio")
 	private String domicilio;
 
 	

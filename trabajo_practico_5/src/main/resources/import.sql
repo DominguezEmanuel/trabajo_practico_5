@@ -1,9 +1,9 @@
 insert into carreras(codigo_carrera , nombre , cantidad_anos , estado) values (1 , 'Contador Público' , 5 , 1);
 insert into carreras(codigo_carrera , nombre , cantidad_anos , estado) values (2 , 'Administración de Empresas' , 4 , 1);
 insert into carreras(codigo_carrera , nombre , cantidad_anos , estado) values (3 , 'Licenciado en Economía Política' , 4 , 1);
-insert into carreras(codigo_carrera , nombre , cantidad_anos , estado) values (4 , 'Lic. Ec. Política' , 5 , 1);
-insert into carreras(codigo_carrera , nombre , cantidad_anos , estado) values (5 , 'Lic. Administración' , 5 , 1);
-insert into carreras(codigo_carrera , nombre , cantidad_anos , estado) values (6 , 'Doc. en Políticas Públicas' , 6 , 1);
+insert into carreras(codigo_carrera , nombre , cantidad_anos , estado) values (4 , 'Lic. Administración' , 5 , 1);
+insert into carreras(codigo_carrera , nombre , cantidad_anos , estado) values (5 , 'Lic. Ec. Política' , 5 , 1);
+insert into carreras(codigo_carrera , nombre , cantidad_anos , estado) values (6 , 'Lic. Administración' , 5 , 1);
 
 insert into alumnos(lu , dni_alumno , nombre , apellido , email , telefono , fecha_nacimiento , domicilio , codigo_carrera) values (1 , '45753951' , 'Juan' , 'Salas' , 'juan1890@gmail.com' , '388415789' , '2000-12-22' , 'Mariano Moreno' , 1);
 insert into alumnos(lu , dni_alumno , nombre , apellido , email , telefono , fecha_nacimiento , domicilio , codigo_carrera) values (2, '32456789', 'María', 'González', 'maria.gonzalez@example.com', '388512345', '1998-07-15', 'Avenida Siempre Viva 742', 1);
@@ -30,5 +30,5 @@ INSERT INTO materias(cantidad_horas, codigo_carrera, codigo_materia, legajo_doce
 INSERT INTO materias(cantidad_horas, codigo_carrera, codigo_materia, legajo_docente, curso, modalidad, nombre) VALUES ('60', 2, 3, 3, 'Tercero', 'Virtual', 'Macroeconomía');
 INSERT INTO materias(cantidad_horas, codigo_carrera, codigo_materia, legajo_docente, curso, modalidad, nombre) VALUES ('45', 4, 4, 4, 'Cuarto', 'Presencial', 'Econometría');
 INSERT INTO materias(cantidad_horas, codigo_carrera, codigo_materia, legajo_docente, curso, modalidad, nombre) VALUES ('35', 5, 5, 5, 'Primero', 'Virtual', 'Finanzas Corporativas');
-INSERT INTO materias(cantidad_horas, codigo_carrera, codigo_materia, legajo_docente, curso, modalidad, nombre) VALUES ('55', 1, 6, 6, 'Segundo', 'Presencial', 'Marketing');
+INSERT INTO materias(cantidad_horas, codigo_carrera, codigo_materia, legajo_docente, curso, modalidad, nombre) VALUES ('55', 6, 6, 6, 'Segundo', 'Presencial', 'Marketing');
 

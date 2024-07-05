@@ -11,8 +11,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.dto.AlumnoDTO;
 import ar.edu.unju.fi.service.IAlumnoService;
+import jakarta.validation.Valid;
 
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 
 @Controller
 @RequestMapping("/alumno")
@@ -43,18 +45,26 @@ public class AlumnoController {
 	}
 	
 	@PostMapping("/guardar")
-	public ModelAndView guardarAlumno(@ModelAttribute("alumno") AlumnoDTO alumnoDTO) {
-		ModelAndView modelView = new ModelAndView("alumnos");
-		String mensaje;
-		Boolean exito = alumnoService.agregarAlumno(alumnoDTO);
-		if (exito) {
-			mensaje = "Alumno guardado con éxito!";
+	public ModelAndView guardarAlumno(@Valid @ModelAttribute("alumno") AlumnoDTO alumnoDTO , BindingResult result) {
+		ModelAndView modelView;
+		
+		if(result.hasErrors()) {
+			modelView = new ModelAndView("alumno");
+			modelView.addObject("alumno", alumnoDTO);
+			modelView.addObject("titulo","Nuevo Alumno");
 		}else {
-			mensaje = "El alumno no se pudo guardar";
+			modelView = new ModelAndView("alumnos");
+			Boolean exito = alumnoService.agregarAlumno(alumnoDTO);
+			String mensaje;
+			if (exito) {
+				mensaje = "Alumno guardado con éxito!";
+			}else {
+				mensaje = "El alumno no se pudo guardar";
+			}
+			modelView.addObject("exito", exito);
+			modelView.addObject("mensaje", mensaje);
+			modelView.addObject("alumnos", alumnoService.getAlumnos());
 		}
-		modelView.addObject("exito", exito);
-		modelView.addObject("mensaje", mensaje);
-		modelView.addObject("alumnos", alumnoService.getAlumnos());
 		return modelView;
 	}
 	
