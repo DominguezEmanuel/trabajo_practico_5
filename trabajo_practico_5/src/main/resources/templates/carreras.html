@@ -24,8 +24,8 @@
 							<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 						</div>
 						<!-- Boton Agregar -->
-						<div class="dgrid gap-2 d-md-flex justify-content-md-end mb-2">
-							<a class="btn btn-success" data-th-href="@{/carrera/nuevo}" role="button">Agregar Carrera</a>
+						<div class="dgrid gap-2 d-md-flex justify-content-md-end">
+							<a class="btn btn-success" data-th-href="@{/carrera/nuevo}" role="button"><i class="bi bi-plus-circle"></i></a>
 						</div>
 						<div class="container mt-5">
 						    <div class="row">
@@ -40,14 +40,15 @@
 						                        <span th:if="${!car.estado}">Estado: Inactiva</span>
 						                    </p>
 						                    <div class="text-center">
-						                        <a class="btn btn-warning" th:href="@{/carrera/modificar/}+${car.codigo}" role="button">Editar</a>
-						                        <!-- BOTON QUE LLAMA AL MODAL -->
-						                        <button type="button" class="btn btn-danger me-2 b" data-bs-toggle="modal" th:attr="data-bs-target=${'#modalEliminar' + car.codigo}">Eliminar</button>
+						                        <a class="btn btn-warning" th:href="@{/carrera/modificar/}+${car.codigo}" role="button"><i class="bi bi-pencil-fill"></i></a>
+						                        <a class="btn btn-danger" th:href="@{/carrera/eliminar/}+${car.codigo}" role="button"><i class="bi bi-trash-fill"></i></a>
+						                        <!-- BOTON QUE LLAMA AL MODAL
+						                        <button type="button" class="btn btn-danger me-2 b" data-bs-toggle="modal" th:attr="data-bs-target=${'#modalEliminar' + car.codigo}">Eliminar</button>-->
 						                    </div>
 						                </div>
 						            </div>
 						            
-						            <!-- Modal -->
+						            <!-- Modal
 						            <div class="modal fade" th:id="${'modalEliminar' + car.codigo}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
 						                <div class="modal-dialog">
 						                    <div class="modal-content">
@@ -60,12 +61,12 @@
 						                        </div>
 						                        <div class="modal-footer">
 						                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-						                            <!-- BOTON ELIMINAR-->
+						                            <!-- BOTON ELIMINAR
 						                            <a type="button" role="button" class="btn btn-danger me-2 b" th:href="@{/carrera/eliminar/}+${car.codigo}">Eliminar</a>
 						                        </div>
 						                    </div>
 						                </div>
-						            </div>
+						            </div>-->
 						        </div>
 						    </div>
 						</div>

@@ -22,8 +22,8 @@
 							<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 						</div>
 						<!-- Botón Agregar -->
-						<div class="dgrid gap-2 d-md-flex justify-content-md-end mb-2">
-							<a class="btn btn-success" data-th-href="@{/alumno/nuevo}" role="button">Agregar Alumno</a>
+						<div class="dgrid gap-2 d-md-flex justify-content-md-end">
+							<a class="btn btn-success" data-th-href="@{/alumno/nuevo}" role="button"><i class="bi bi-plus-circle"></i></a>
 						</div>
 						 <div class="container mt-5">
 						 	<div class="row">
@@ -35,92 +35,35 @@
 						 					<p class="card-text text-center">DNI: <span th:text="${alum.dni}"></span></p>
 						 					<p class="card-text text-center">Correo: <span th:text="${alum.email}"></span></p>
 						 					<div class="text-center">
-						 						<a class="btn btn-warning" th:href="@{/alumno/modificar/}+${alum.lu}" role="button">Editar</a>
-						 						<!-- BOTON QUE LLAMA AL MODAL -->
-						 						<button type="button" class="btn btn-danger me-2 b" data-bs-toggle="modal" th:attr="data-bs-target=${'#modalEliminar' + alum.lu}">Eliminar</button>
+						 						<a class="btn btn-warning" th:href="@{/alumno/modificar/}+${alum.lu}" role="button"><i class="bi bi-pencil-fill"></i></a>
+						 						<a class="btn btn-danger" th:href="@{/alumno/eliminar/}+${alum.lu}" role="button"><i class="bi bi-trash-fill"></i></a>
 						 					</div>
-						 				</div>
-						 			</div>
-						 			
-						 			<!-- MODAL -->
-						 			<div  class="modal fade" th:id="${'modalEliminar' + alum.lu}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
-						 				<div class="modal-dialog">
-						 					<div class="modal-header">
-						 						<h1 class="modal-title fs-5" id="exampleModalLabel">Confirmar Eliminación</h1>
-										        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-						 					</div>
-						 					<div class="modal-body">
-												¿Está seguro de que desea eliminar al Alumno?
-											 </div>
-											 <div class="modal-footer">
-										        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-												
-												<a type="button" role="button" class="btn btn-danger me-2 b" data-th-href="@{/alumno/eliminar/}+${alum.lu}" >Eliminar</a>
-										     </div>
+						 					<!-- MODAL
+						 					<div class="modal fade" th:id="${'modalEliminar' + alum.lu}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+									 			<div class="modal-dialog">
+									 				<div class="modal-header">
+									 					<h1 class="modal-title fs-5" id="exampleModalLabel">Confirmar Eliminación</h1>
+												        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+									 				</div>
+									 				<div class="modal-body">
+														¿Está seguro de que desea eliminar al Alumno?
+													 </div>
+													 <div class="modal-footer">
+												        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+														<a type="button" role="button" class="btn btn-danger me-2 b" data-th-href="@{/alumno/eliminar/}+${alum.lu}" >Eliminar</a>
+												     </div>
+									 			</div>
+									 		</div>-->
 						 				</div>
 						 			</div>
 						 		</div>
+						 		
 						 	</div>
 						 </div>
-						 <!--  <table class="table table-hover table-striped">
-							<thead>
-							    <tr class="table-dark">
-							      <th scope="col" class="text-center">DNI</th>
-							      <th scope="col" class="text-center">Nombre</th>
-							      <th scope="col" class="text-center">Apellido</th>
-							      <th scope="col" class="text-center">Email</th>
-							      <th scope="col" class="text-center">Teléfono</th>
-							      <th scope="col" class="text-center">Fecha de Nacimiento</th>
-							      <th scope="col" class="text-center">Domicilio</th>
-							      <th scope="col" class="text-center">LU</th>
-							      <th scope="col" class="text-center">Opciones</th>
-							    </tr>
-							  </thead>
-							  <tbody>
-							  	<tr data-th-each="alum : ${alumnos}">
-							  		<td class="text-center" data-th-text="${alum.dni}"></td>
-							  		<td class="text-center" data-th-text="${alum.nombre}"></td>
-							  		<td class="text-center" data-th-text="${alum.apellido}"></td>
-							  		<td class="text-center" data-th-text="${alum.email}"></td>
-							  		<td class="text-center" data-th-text="${alum.telefono}"></td>
-							  		<td class="text-center" data-th-text="${alum.fechaNacimiento}"></td>
-							  		<td class="text-center" data-th-text="${alum.domicilio}"></td>
-							  		<td class="text-center" data-th-text="${alum.lu}"></td>
-									<td>
-										<div class="text-center">
-							  				<a class="btn btn-warning" data-th-href="@{/alumno/modificar/}+${alum.lu}" role="button">Editar</a> -->
-							  				<!-- BOTON QUE LLAMA AL MODAL -->
-											<!--
-											<button type="button" class="btn btn-danger me-2 b" data-bs-toggle="modal" th:attr="data-bs-target=${'#modalEliminar' + alum.lu}">Eliminar</button>
-							  			</div>
-							  			<!-- MODAL --
-							  			<div class="modal fade" th:id="${'modalEliminar' + alum.lu}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
-										  <div class="modal-dialog">
-										    <div class="modal-content">
-										      <div class="modal-header">
-										        <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmar Eliminación</h1>
-										        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-										      </div>
-										      <div class="modal-body">
-												¿Está seguro de que desea eliminar al Alumno?
-											  </div>
-										      <div class="modal-footer">
-										        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-												
-												<a type="button" role="button" class="btn btn-danger me-2 b" data-th-href="@{/alumno/eliminar/}+${alum.lu}" >Eliminar</a>
-										      </div>
-										    </div>
-										  </div>
-										</div>
-							  		</td>
-							  	</tr>
-							  </tbody>
-						</table> -->
 					</div>
 				</div>
 			</div>
 		</div>
-		
 		<!-- Footer -->
 		<footer data-th-replace="~{/layouts/footer :: footer}"></footer>
 		<!-- Bootstrap JavaScript -->
