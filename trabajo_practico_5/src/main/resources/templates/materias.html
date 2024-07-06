@@ -24,37 +24,24 @@
 						<div class="dgrid gap-2 d-md-flex justify-content-md-end mb-2">
 							<a class="btn btn-success" data-th-href="@{/materia/nuevo}" role="button"><i class="bi bi-plus-circle"></i></a>
 						</div>
-						<table class="table table-hover table-striped">
-							<thead>
-							    <tr class="table-dark">
-							      <th scope="col" class="text-center">Código</th>
-							      <th scope="col" class="text-center">Nombre</th>
-							      <th scope="col" class="text-center">Curso</th>
-							      <th scope="col" class="text-center">Horas</th>
-							      <th scope="col" class="text-center">Modalidad</th>
-							      <th scope="col" class="text-center">Docente</th>
-							      <th scope="col" class="text-center">Carrera</th>
-							      <th scope="col" class="text-center">Opciones</th>
-							    </tr>
-							  </thead>
-							  <tbody>
-							  	<tr data-th-each="mat : ${materias}">
-							  		<td class="text-center" data-th-text="${mat.codigo}"></td>
-							  		<td class="text-center" data-th-text="${mat.nombre}"></td>
-							  		<td class="text-center" data-th-text="${mat.curso}"></td>
-							  		<td class="text-center" data-th-text="${mat.cantidadHoras}+' horas'"></td>
-							  		<td class="text-center" data-th-text="${mat.modalidad}"></td>
-							  		<td class="text-center" data-th-text="${mat.docente.nombre + ' ' + mat.docente.apellido}"></td>
-							  		<td class="text-center" data-th-text="${mat.carrera.nombre}"></td>
-							  		<td>
-							  			<div class="text-center">
-							  				<a class="btn btn-warning" data-th-href="@{/materia/modificar/}+${mat.codigo}" role="button">Editar</a>
-							  				<!-- BOTON QUE LLAMA AL MODAL -->
-											<button type="button" class="btn btn-danger me-2 b" data-bs-toggle="modal" th:attr="data-bs-target=${'#modalEliminar' + mat.codigo}">Eliminar</button>
-							  			</div>
-							  			
-							  			<!-- Modal -->
-										<div class="modal fade" th:id="${'modalEliminar' + mat.codigo}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+						<div class="container mt-5">
+							<div class="row">
+								<div th:each="mat : ${materias}">
+									<div class="card">
+										<div class="card-body">
+											<h5 class="card-title text-center" th:text="${mat.nombre}"></h5>
+											<p class="card-text text-center">Codigo: <span th:text="${mat.codigo}"></span></p>
+											<p class="card-text text-center">Curso: <span th:text="${mat.curso}"></span></p>
+											<p class="card-text text-center">Modalidad: <span th:text="${mat.modalidad}"></span></p>
+											<div class="text-center">
+								  				<a class="btn btn-warning" data-th-href="@{/materia/modificar/}+${mat.codigo}" role="button">Editar</a>
+								  				<!-- BOTON QUE LLAMA AL MODAL -->
+												<button type="button" class="btn btn-danger me-2 b" data-bs-toggle="modal" th:attr="data-bs-target=${'#modalEliminar' + mat.codigo}">Eliminar</button>
+							  				</div>
+										</div>
+									</div>
+									
+									<div class="modal fade" th:id="${'modalEliminar' + mat.codigo}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
 										  <div class="modal-dialog">
 										    <div class="modal-content">
 										      <div class="modal-header">
@@ -72,10 +59,9 @@
 										    </div>
 										  </div>
 										</div>
-							  		</td>
-							  	</tr>
-							  </tbody>
-						</table>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
