@@ -63,7 +63,7 @@ public class MateriaController {
 	}
 	
 	@PostMapping("/guardar")
-	public ModelAndView guardarMateria( @Valid @ModelAttribute("materia") MateriaDTO materiaDTO, BindingResult result) {
+	public ModelAndView guardarMateria(@Valid @ModelAttribute("materia") MateriaDTO materiaDTO, BindingResult result) {
 		ModelAndView modelView;
 		if(result.hasErrors()) {
 			modelView = new ModelAndView("materia");
@@ -104,25 +104,35 @@ public class MateriaController {
 	}
 	
 	@PostMapping("/modificar")
-	public String modificarMateria(@ModelAttribute("materia") MateriaDTO materiaDTO, Model model) {
-		carreraDTO = carreraService.buscarCarrera(materiaDTO.getCarrera().getCodigo());
-		docenteDTO = docenteService.buscarDocente(materiaDTO.getDocente().getLegajo());
-		materiaDTO.setCarrera(carreraDTO);
-		materiaDTO.setDocente(docenteDTO);
-		Boolean exito = false;
-		String mensaje = "";
-		try {
-			materiaService.modificarMateria(materiaDTO);
-			mensaje = "Materia modificada con exito!";
-			exito = true;
-		}catch(Exception e) {
-			mensaje = e.getMessage();
+	public String modificarMateria(@Valid @ModelAttribute("materia") MateriaDTO materiaDTO, BindingResult result , Model model) {
+		if(result.hasErrors()) {
+			Boolean edicion = true;
+			model.addAttribute("edicion", edicion);
+			model.addAttribute("materia", materiaDTO);
+			model.addAttribute("titulo", "Modificar Materia");
+			model.addAttribute("carreras", carreraService.getCarreras());
+			model.addAttribute("docentes", docenteService.getDocentes());
+			return "materia";
+		}else {
+			carreraDTO = carreraService.buscarCarrera(materiaDTO.getCarrera().getCodigo());
+			docenteDTO = docenteService.buscarDocente(materiaDTO.getDocente().getLegajo());
+			materiaDTO.setCarrera(carreraDTO);
+			materiaDTO.setDocente(docenteDTO);
+			Boolean exito = false;
+			String mensaje = "";
+			try {
+				materiaService.modificarMateria(materiaDTO);
+				mensaje = "Materia modificada con exito!";
+				exito = true;
+			}catch(Exception e) {
+				mensaje = e.getMessage();
+			}
+			model.addAttribute("mensaje", mensaje);
+			model.addAttribute("exito", exito);
+			model.addAttribute("materias", materiaService.getMaterias());
+			model.addAttribute("titulo", "Materias");
+			return "materias";
 		}
-		model.addAttribute("mensaje", mensaje);
-		model.addAttribute("exito", exito);
-		model.addAttribute("materias", materiaService.getMaterias());
-		model.addAttribute("titulo", "Materias");
-		return "materias";
 	}
 	
 	@GetMapping("/eliminar/{codigo}")

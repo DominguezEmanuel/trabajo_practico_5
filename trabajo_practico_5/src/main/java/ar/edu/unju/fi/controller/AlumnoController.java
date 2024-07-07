@@ -79,22 +79,30 @@ public class AlumnoController {
 	}
 
 	@PostMapping("/modificar")
-	public String modificarAlumno(@Valid @ModelAttribute("alumno") AlumnoDTO alumnoDTO, Model model, BindingResult result) {
-		Boolean exito = false;
-		String mensaje = "";
-		try {
-			alumnoService.modificarAlumno(alumnoDTO);
-			mensaje = "Alumno modificado con exito!";
-			exito = true;
-		}catch(Exception e) {
-			mensaje = e.getMessage();
+	public String modificarAlumno(@Valid @ModelAttribute("alumno") AlumnoDTO alumnoDTO, BindingResult result , Model model) {
+		if(result.hasErrors()) {
+			Boolean edicion = true;
+			model.addAttribute("alumno" , alumnoDTO);
+			model.addAttribute("edicion" , edicion);
+			model.addAttribute("titulo" , "Modificar Alumno");
+			return "alumno";
+		}else {
+			Boolean exito = false;
+			String mensaje = "";
+			try {
+				alumnoService.modificarAlumno(alumnoDTO);
+				mensaje = "Alumno modificado con exito!";
+				exito = true;
+			}catch(Exception e) {
+				mensaje = e.getMessage();
+			}
+			model.addAttribute("mensaje", mensaje);
+			model.addAttribute("exito", exito);
+			model.addAttribute("alumnos", alumnoService.getAlumnos());
+			model.addAttribute("titulo", "Alumnos");
+			return "alumnos";
 		}
-		model.addAttribute("mensaje", mensaje);
-		model.addAttribute("exito", exito);
-		model.addAttribute("alumnos", alumnoService.getAlumnos());
-		model.addAttribute("titulo", "Alumnos");
-		return "alumnos";
-		}
+	}
 
 	@GetMapping("/eliminar/{lu}")
 	public String eliminarAlumno(@PathVariable(value = "lu") Integer lu) {

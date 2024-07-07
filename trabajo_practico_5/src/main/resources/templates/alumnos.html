@@ -37,7 +37,6 @@
 						 					<div class="text-center">
 						 						<a class="btn btn-warning" th:href="@{/alumno/modificar/}+${alum.lu}" role="button"><i class="bi bi-pencil-fill"></i></a>
 												<button type="button" class="btn btn-danger me-2 b" data-bs-toggle="modal" th:attr="data-bs-target=${'#modalEliminar' + alum.lu}"> <i class="bi bi-trash-fill"></i></button>
-						 						<!--<a class="btn btn-danger" th:href="@{/alumno/eliminar/}+${alum.lu}" role="button"><i class="bi bi-trash-fill"></i></a>-->
 						 					</div>
 						 					<!-- MODAL -->
 						 					<div class="modal fade" th:id="${'modalEliminar' + alum.lu}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
