@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import ar.edu.unju.fi.dto.DocenteDTO;
 import ar.edu.unju.fi.mapper.DocenteMapper;
 import ar.edu.unju.fi.model.Docente;
+import ar.edu.unju.fi.model.Materia;
 import ar.edu.unju.fi.repository.DocenteRepository;
+import ar.edu.unju.fi.repository.MateriaRepository;
 import ar.edu.unju.fi.service.IDocenteService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -18,6 +20,8 @@ public class DocenteServiceImpl implements IDocenteService {
 
 	@Autowired
 	private DocenteRepository docenteRepository;
+	@Autowired
+	private MateriaRepository materiaRepository;
 	@Autowired
 	private DocenteMapper docenteMapper;
 	@Override
@@ -50,7 +54,11 @@ public class DocenteServiceImpl implements IDocenteService {
 	@Override
 	public void eliminarDocente(Integer legajo) {
 		Docente docente = docenteRepository.findById(legajo).get();
+		Materia materiaDocente = docente.getMateria();
+		materiaDocente.setDocente(null);
 		docenteRepository.delete(docente);
+		materiaRepository.save(materiaDocente);
+		docente.setMateria(null);
 		log.info("Docente eliminado");
 	}
 

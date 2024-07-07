@@ -36,11 +36,13 @@
 						 					<p class="card-text text-center">Correo: <span th:text="${alum.email}"></span></p>
 						 					<div class="text-center">
 						 						<a class="btn btn-warning" th:href="@{/alumno/modificar/}+${alum.lu}" role="button"><i class="bi bi-pencil-fill"></i></a>
-						 						<a class="btn btn-danger" th:href="@{/alumno/eliminar/}+${alum.lu}" role="button"><i class="bi bi-trash-fill"></i></a>
+												<button type="button" class="btn btn-danger me-2 b" data-bs-toggle="modal" th:attr="data-bs-target=${'#modalEliminar' + alum.lu}"> <i class="bi bi-trash-fill"></i></button>
+						 						<!--<a class="btn btn-danger" th:href="@{/alumno/eliminar/}+${alum.lu}" role="button"><i class="bi bi-trash-fill"></i></a>-->
 						 					</div>
-						 					<!-- MODAL
+						 					<!-- MODAL -->
 						 					<div class="modal fade" th:id="${'modalEliminar' + alum.lu}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
 									 			<div class="modal-dialog">
+													<div class="modal-content">
 									 				<div class="modal-header">
 									 					<h1 class="modal-title fs-5" id="exampleModalLabel">Confirmar Eliminación</h1>
 												        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -53,7 +55,8 @@
 														<a type="button" role="button" class="btn btn-danger me-2 b" data-th-href="@{/alumno/eliminar/}+${alum.lu}" >Eliminar</a>
 												     </div>
 									 			</div>
-									 		</div>-->
+												</div>
+									 		</div>
 						 				</div>
 						 			</div>
 						 		</div>

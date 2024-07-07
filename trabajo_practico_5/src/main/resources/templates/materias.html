@@ -24,23 +24,27 @@
 						<div class="dgrid gap-2 d-md-flex justify-content-md-end mb-2">
 							<a class="btn btn-success" data-th-href="@{/materia/nuevo}" role="button"><i class="bi bi-plus-circle"></i></a>
 						</div>
+						
+						<!--Cards-->
 						<div class="container mt-5">
 							<div class="row">
-								<div th:each="mat : ${materias}">
+								<div th:each="mat : ${materias}" class="col-md-4 mb-4">
 									<div class="card">
 										<div class="card-body">
 											<h5 class="card-title text-center" th:text="${mat.nombre}"></h5>
-											<p class="card-text text-center">Codigo: <span th:text="${mat.codigo}"></span></p>
+											<p class="card-text text-center">Código: <span th:text="${mat.codigo}"></span>
+											</p>
 											<p class="card-text text-center">Curso: <span th:text="${mat.curso}"></span></p>
 											<p class="card-text text-center">Modalidad: <span th:text="${mat.modalidad}"></span></p>
 											<div class="text-center">
-								  				<a class="btn btn-warning" data-th-href="@{/materia/modificar/}+${mat.codigo}" role="button">Editar</a>
-								  				<!-- BOTON QUE LLAMA AL MODAL -->
-												<button type="button" class="btn btn-danger me-2 b" data-bs-toggle="modal" th:attr="data-bs-target=${'#modalEliminar' + mat.codigo}">Eliminar</button>
-							  				</div>
+												<a class="btn btn-warning" data-th-href="@{/materia/modificar/}+${mat.codigo}" role="button"><i class="bi bi-pencil-fill"></i></a>	
+														<!-- BOTON QUE LLAMA AL MODAL -->
+											<button type="button" class="btn btn-danger me-2 b" data-bs-toggle="modal" th:attr="data-bs-target=${'#modalEliminar' + mat.codigo}"><i class="bi bi-trash-fill"></i></button>
+											</div>
 										</div>
 									</div>
 									
+									<!--MODAL-->
 									<div class="modal fade" th:id="${'modalEliminar' + mat.codigo}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
 										  <div class="modal-dialog">
 										    <div class="modal-content">
