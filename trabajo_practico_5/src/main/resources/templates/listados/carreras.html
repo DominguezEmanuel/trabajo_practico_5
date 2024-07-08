@@ -35,11 +35,12 @@
 								<div class="card">
 									<div class="card-body">
 										<h5 class="card-title text-center" th:text="${car.nombre}"></h5>
-										<p class="card-text text-center">Código: <span th:text="${car.codigo}"></span>
-										</p>
-										<p class="card-text text-center">Duración: <span
-												th:text="${car.cantidadAnios} + ' años'"></span></p>
-										<p class="card-text text-center">
+										<p class="card-text text-center mb-0"><b>Código</b></p>
+								   	    <p class="card-text text-center mb-0"><span th:text="${car.codigo}"></span>
+										<p class="card-text text-center mb-0"><b>Duración</b></p>
+										<p class="card-text text-center mb-0"><span
+										th:text="${car.cantidadAnios} + ' años'"></span></p>
+										<p class="card-text text-center mb-1">
 											<span th:if="${car.estado}">Estado: Activa</span>
 											<span th:if="${!car.estado}">Estado: Inactiva</span>
 										</p>

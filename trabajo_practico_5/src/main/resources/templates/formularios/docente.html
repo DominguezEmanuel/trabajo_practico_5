@@ -16,7 +16,8 @@
 			</div>
 			<div>
 				<form data-th-action="${edicion}?@{/docente/modificar} : @{/docente/guardar}" th:object="${docente}" method="post">
-
+					<div class="container-fluid">
+						
 	       <div class="row mb-3 justify-content-center">
 						<label for="legajo"
 							class="col-sm-6 col-lg-2 col-form-label text-lg-end bg-warning text-dark rounded-pill">Legajo</label>
@@ -74,6 +75,7 @@
 
 					<p class="text-center"><input type="submit" class="btn btn-primary"
 							th:value="${edicion}?'Modificar':'Guardar'"></p>
+					</div>
 				</form>
 			</div>
 		</div>

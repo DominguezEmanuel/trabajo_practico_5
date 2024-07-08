@@ -5,10 +5,11 @@
 		<header data-th-replace="~{/layouts/header :: header}"></header>
 		
 		<nav data-th-replace="~{/layouts/navbar :: navbar}"></nav>
+		<div class="container-fluid">
+			
 		<div class="container mb-3">		
 			
 			<!-- Formulario del select -->
-
 			<div class="row py-5 bg-dark rounded-4">
 				<h2 class="text-white text-center mb-3">Consultar alumnos por carrera</h2>
 				<form data-th-action="@{/consulta/buscar}" method="post">
@@ -30,7 +31,8 @@
 				
 				<!-- Cards de Alumnos -->
 
-				<h2 class="text-center text-white m-3" data-th-text="'Alumnos Inscriptos en: ' + ${carreraSeleccionada}"></h2>
+				<h2  class="text-center text-white mb-0">Alumnos inscriptos en</h2> 
+				<h2 class="text-center text-white mb-3" data-th-text="${carreraSeleccionada}"></h2>
 
 				<div class="container mt-2">
 				       <div class="row" th:if="${alumnos != null}">
@@ -50,7 +52,7 @@
 				   </div>
 			</div>
 		</div>
-
+		</div>
 		
 		<footer data-th-replace="~{/layouts/footer :: footer}"></footer>
 		

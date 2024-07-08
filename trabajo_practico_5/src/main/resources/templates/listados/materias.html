@@ -32,10 +32,12 @@
 									<div class="card">
 										<div class="card-body">
 											<h5 class="card-title text-center" th:text="${mat.nombre}"></h5>
-											<p class="card-text text-center">Código: <span th:text="${mat.codigo}"></span>
-											</p>
-											<p class="card-text text-center">Curso: <span th:text="${mat.curso}"></span></p>
-											<p class="card-text text-center">Modalidad: <span th:text="${mat.modalidad}"></span></p>
+											<p class="card-text text-center mb-0"><b>Código</b></p>
+											<p class="card-text text-center mb-0"><span th:text="${mat.codigo}"></span></p>
+											<p class="card-text text-center mb-0"><b>Curso</b></p>
+											<p class="card-text text-center mb-0"><span th:text="${mat.curso}"></span></p>
+											<p class="card-text text-center mb-0"><b>Modalidad</b></p>
+											<p class="card-text text-center mb-1"><span th:text="${mat.modalidad}"></span></p>
 											<div class="text-center">
 												<a class="btn btn-warning" data-th-href="@{/materia/modificar/}+${mat.codigo}" role="button"><i class="bi bi-pencil-fill"></i></a>	
 														<!-- BOTON QUE LLAMA AL MODAL -->

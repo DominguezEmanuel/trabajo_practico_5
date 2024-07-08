@@ -31,8 +31,10 @@
 						 			<div class="card">
 						 				<div class="card-body">
 						 					<h5 class="card-title text-center" th:text="${alum.nombre + ' ' + alum.apellido}"></h5>
-						 					<p class="card-text text-center">DNI: <span th:text="${alum.dni}"></span></p>
-						 					<p class="card-text text-center">Correo: <span th:text="${alum.email}"></span></p>
+											<p class="card-text text-center mb-0"><b>DNI</b></p>
+						 					<p class="card-text text-center mb-0"><span th:text="${alum.dni}"></span></p>
+											<p class="card-text text-center mb-0"><b>Correo</b></p>
+						 					<p class="card-text text-center mb-1"><span th:text="${alum.email}"></span></p>
 						 					<div class="text-center">
 						 						<a class="btn btn-warning" th:href="@{/alumno/modificar/}+${alum.lu}" role="button"><i class="bi bi-pencil-fill"></i></a>
 												<button type="button" class="btn btn-danger me-2 b" data-bs-toggle="modal" th:attr="data-bs-target=${'#modalEliminar' + alum.lu}"> <i class="bi bi-trash-fill"></i></button>
