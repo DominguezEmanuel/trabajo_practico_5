@@ -27,6 +27,7 @@
 								<div th:each="doc : ${docentes}" class="col-md-4 mb-4">
 									<div class="card">
 										<div class="card-body">
+											<i class="bi bi-person-circle"></i>
 											<h5 class="card-title text-center" th:text="${doc.nombre + ' ' + doc.apellido}"></h5>
 											<p class="card-text text-center mb-0"><b>Legajo</b></p>
 											<p class="card-text text-center mb-0"><span th:text="${doc.legajo}"></span></p>
