@@ -48,7 +48,7 @@ public class MateriaController {
 		model.addAttribute("titulo", "Materias");
 		model.addAttribute("exito", false);
 		model.addAttribute("mensaje", "");
-		return "materias";
+		return "listados/materias";
 	}
 	
 	@GetMapping("/nuevo")
@@ -59,20 +59,20 @@ public class MateriaController {
 		model.addAttribute("materia", materiaDTO);
 		model.addAttribute("edicion", edicion);
 		model.addAttribute("titulo", "Nueva Materia");
-		return "materia";
+		return "formularios/materia";
 	}
 	
 	@PostMapping("/guardar")
 	public ModelAndView guardarMateria(@Valid @ModelAttribute("materia") MateriaDTO materiaDTO, BindingResult result) {
 		ModelAndView modelView;
 		if(result.hasErrors()) {
-			modelView = new ModelAndView("materia");
+			modelView = new ModelAndView("formularios/materia");
 			modelView.addObject("materia",materiaDTO);
 			modelView.addObject("docentes", docenteService.getDocentes());
 			modelView.addObject("carreras", carreraService.getCarreras());
 			modelView.addObject("titulo","Nueva Materia");
 		}else {
-			modelView = new ModelAndView("materias");
+			modelView = new ModelAndView("listados/materias");
 			String mensaje = "";
 			carreraDTO = carreraService.buscarCarrera(materiaDTO.getCarrera().getCodigo());
 			docenteDTO = docenteService.buscarDocente(materiaDTO.getDocente().getLegajo());
@@ -100,7 +100,7 @@ public class MateriaController {
 		model.addAttribute("titulo", "Modificar Materia");
 		model.addAttribute("carreras", carreraService.getCarreras());
 		model.addAttribute("docentes", docenteService.getDocentes());
-		return "materia";
+		return "formularios/materia";
 	}
 	
 	@PostMapping("/modificar")
@@ -112,7 +112,7 @@ public class MateriaController {
 			model.addAttribute("titulo", "Modificar Materia");
 			model.addAttribute("carreras", carreraService.getCarreras());
 			model.addAttribute("docentes", docenteService.getDocentes());
-			return "materia";
+			return "formularios/materia";
 		}else {
 			carreraDTO = carreraService.buscarCarrera(materiaDTO.getCarrera().getCodigo());
 			docenteDTO = docenteService.buscarDocente(materiaDTO.getDocente().getLegajo());
@@ -131,7 +131,7 @@ public class MateriaController {
 			model.addAttribute("exito", exito);
 			model.addAttribute("materias", materiaService.getMaterias());
 			model.addAttribute("titulo", "Materias");
-			return "materias";
+			return "listados/materias";
 		}
 	}
 	

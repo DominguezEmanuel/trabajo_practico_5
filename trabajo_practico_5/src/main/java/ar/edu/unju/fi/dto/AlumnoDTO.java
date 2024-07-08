@@ -27,6 +27,7 @@ public class AlumnoDTO {
 	@NotEmpty(message="Debe ingresar su email")
 	private String email;
 	@NotEmpty(message="Debe ingresar su telefono")
+	@Pattern(regexp="[0-9]*", message="Debe ingresar únicamente números")
 	private String telefono;
 	@NotBlank(message = "Debe ingresar una fecha")
 	private String fechaNacimiento;

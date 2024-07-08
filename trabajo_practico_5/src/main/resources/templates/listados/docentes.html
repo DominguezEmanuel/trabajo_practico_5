@@ -27,10 +27,9 @@
 								<div th:each="doc : ${docentes}" class="col-md-4 mb-4">
 									<div class="card">
 										<div class="card-body">
-											<h5 class="card-title text-center" th:text="${doc.nombre}"></h5>
-											<p class="card-text text-center">Legajo <span th:text="${doc.legajo}"></span></p>
-											<p class="card-text text-center">Apellido <span th:text="${doc.apellido}"></span></p>
-											<p class="card-text text-center">Telefono <span th:text="${doc.telefono}"></span></p>
+											<h5 class="card-title text-center" th:text="${doc.nombre + ' ' + doc.apellido}"></h5>
+											<p class="card-text text-center">Legajo: <span th:text="${doc.legajo}"></span></p>
+											<p class="card-text text-center">Teléfono: <span th:text="${doc.telefono}"></span></p>
 											<div class="text-center">
 												<a class="btn btn-warning" data-th-href="@{/docente/modificar/}+${doc.legajo}" role="button"> <i class="bi bi-pencil-fill"></i></a>
 												<button type="button" class="btn btn-danger me-2 b" data-bs-toggle="modal" th:attr="data-bs-target=${'#modalEliminar' + doc.legajo}"><i class="bi bi-trash-fill"></i></button>

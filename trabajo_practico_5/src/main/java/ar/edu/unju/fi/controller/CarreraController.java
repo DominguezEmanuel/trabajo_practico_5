@@ -31,7 +31,7 @@ public class CarreraController {
 		model.addAttribute("titulo", "Carreras");
 		model.addAttribute("exito", false);
 		model.addAttribute("mensaje", "");
-		return "carreras";
+		return "listados/carreras";
 	}
 	
 	@GetMapping("/nuevo")
@@ -40,18 +40,18 @@ public class CarreraController {
 		model.addAttribute("carrera", carreraDTO);
 		model.addAttribute("edicion", edicion);
 		model.addAttribute("titulo", "Nueva Carrera");
-		return "carrera";
+		return "formularios/carrera";
 	}
 	
 	@PostMapping("/guardar")
 	public ModelAndView guardarCarrera(@Valid @ModelAttribute("carrera") CarreraDTO carreraDTO, BindingResult result) {
 		ModelAndView modelView;
 		if(result.hasErrors()) {
-			modelView = new ModelAndView("carrera");
+			modelView = new ModelAndView("formularios/carrera");
 			modelView.addObject("carrera", carreraDTO);
 			modelView.addObject("titulo","Nueva Carrera");
 		}else {
-			modelView = new ModelAndView("carreras");
+			modelView = new ModelAndView("listados/carreras");
 		String mensaje;
 		carreraDTO.setEstado("true");
 		Boolean exito = carreraService.agregarCarrera(carreraDTO);
@@ -74,7 +74,7 @@ public class CarreraController {
 		model.addAttribute("edicion", edicion);
 		model.addAttribute("carrera", carreraEncontradaDTO);
 		model.addAttribute("titulo", "Modificar Carrera");
-		return "carrera";
+		return "formularios/carrera";
 	}
 	
 	@PostMapping("/modificar")
@@ -84,7 +84,7 @@ public class CarreraController {
 			model.addAttribute("carrera" , carreraDTO);
 			model.addAttribute("edicion" , edicion);
 			model.addAttribute("titulo" , "Modificar Carrera");
-			return "carrera";
+			return "formularios/carrera";
 		}else {
 			Boolean exito = false;
 			String mensaje = "";
@@ -99,7 +99,7 @@ public class CarreraController {
 			model.addAttribute("exito", exito);
 			model.addAttribute("carreras", carreraService.getCarreras());
 			model.addAttribute("titulo", "Carreras");
-			return "carreras";
+			return "listados/carreras";
 		}
 	}
 	

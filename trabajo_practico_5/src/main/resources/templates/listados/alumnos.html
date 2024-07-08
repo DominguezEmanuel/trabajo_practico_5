@@ -30,8 +30,7 @@
 						 		<div th:each="alum : ${alumnos}" class="col-md-4 mb-4">
 						 			<div class="card">
 						 				<div class="card-body">
-						 					<h5 class="card-title text-center" th:text="${alum.nombre}"></h5>
-						 					<p class="card-text text-center">Apellido: <span th:text="${alum.apellido}"></span></p>
+						 					<h5 class="card-title text-center" th:text="${alum.nombre + ' ' + alum.apellido}"></h5>
 						 					<p class="card-text text-center">DNI: <span th:text="${alum.dni}"></span></p>
 						 					<p class="card-text text-center">Correo: <span th:text="${alum.email}"></span></p>
 						 					<div class="text-center">

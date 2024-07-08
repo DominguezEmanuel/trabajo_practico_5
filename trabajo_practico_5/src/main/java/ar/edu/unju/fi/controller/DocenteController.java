@@ -31,7 +31,7 @@ public class DocenteController {
 		model.addAttribute("titulo", "Docentes");
 		model.addAttribute("exito", false);
 		model.addAttribute("mensaje", "");
-		return "docentes";
+		return "listados/docentes";
 	}
 	
 	@GetMapping("/nuevo")
@@ -40,18 +40,18 @@ public class DocenteController {
 		model.addAttribute("docente", docenteDTO);
 		model.addAttribute("edicion", edicion);
 		model.addAttribute("titulo", "Nuevo Docente");
-		return "docente";
+		return "formularios/docente";
 	}
 	
 	@PostMapping("/guardar")
 	public ModelAndView guardarDocente(@Valid @ModelAttribute("docente") DocenteDTO docenteDTO, BindingResult result) {
 		ModelAndView modelView ; 
 		if(result.hasErrors()) {
-			modelView = new ModelAndView("docente");
+			modelView = new ModelAndView("formularios/docente");
 			modelView.addObject("docente", docenteDTO);
 			modelView.addObject("titulo","Nuevo Docente");
 		}else {
-			modelView= new ModelAndView("docentes");
+			modelView= new ModelAndView("listados/docentes");
 			String mensaje;
 			Boolean exito = docenteService.agregarDocente(docenteDTO);
 			if (exito) {
@@ -73,7 +73,7 @@ public class DocenteController {
 		model.addAttribute("edicion", edicion);
 		model.addAttribute("docente", docenteEncontradoDTO);
 		model.addAttribute("titulo", "Modificar Docente");
-		return "docente";
+		return "formularios/docente";
 	}
 	
 	@PostMapping("/modificar")
@@ -83,7 +83,7 @@ public class DocenteController {
 			model.addAttribute("docente" , docenteDTO);
 			model.addAttribute("edicion" , edicion);
 			model.addAttribute("titulo" , "Modificar Docente");
-			return "docente";
+			return "formularios/docente";
 		}else {
 			Boolean exito = false;
 			String mensaje = "";
@@ -98,7 +98,7 @@ public class DocenteController {
 			model.addAttribute("exito", exito);
 			model.addAttribute("docentes", docenteService.getDocentes());
 			model.addAttribute("titulo", "Docentes");
-			return "docentes";
+			return "listados/docentes";
 		}
 	}
 	
