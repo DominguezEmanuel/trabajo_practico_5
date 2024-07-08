@@ -31,7 +31,7 @@ public class CarreraController {
 		model.addAttribute("titulo", "Carreras");
 		model.addAttribute("exito", false);
 		model.addAttribute("mensaje", "");
-		return "carreras";
+		return "listados/carreras";
 	}
 	
 	@GetMapping("/nuevo")
@@ -40,18 +40,18 @@ public class CarreraController {
 		model.addAttribute("carrera", carreraDTO);
 		model.addAttribute("edicion", edicion);
 		model.addAttribute("titulo", "Nueva Carrera");
-		return "carrera";
+		return "formularios/carrera";
 	}
 	
 	@PostMapping("/guardar")
 	public ModelAndView guardarCarrera(@Valid @ModelAttribute("carrera") CarreraDTO carreraDTO, BindingResult result) {
 		ModelAndView modelView;
 		if(result.hasErrors()) {
-			modelView = new ModelAndView("carrera");
+			modelView = new ModelAndView("formularios/carrera");
 			modelView.addObject("carrera", carreraDTO);
 			modelView.addObject("titulo","Nueva Carrera");
 		}else {
-			modelView = new ModelAndView("carreras");
+			modelView = new ModelAndView("listados/carreras");
 		String mensaje;
 		carreraDTO.setEstado("true");
 		Boolean exito = carreraService.agregarCarrera(carreraDTO);
@@ -74,25 +74,33 @@ public class CarreraController {
 		model.addAttribute("edicion", edicion);
 		model.addAttribute("carrera", carreraEncontradaDTO);
 		model.addAttribute("titulo", "Modificar Carrera");
-		return "carrera";
+		return "formularios/carrera";
 	}
 	
 	@PostMapping("/modificar")
-	public String modificarCarrera(@ModelAttribute("carrera") CarreraDTO carreraDTO, Model model) {
-		Boolean exito = false;
-		String mensaje = "";
-		try {
-			carreraService.modificarCarrera(carreraDTO);
-			mensaje = "Carrera modificada con exito!";
-			exito = true;
-		}catch(Exception e) {
-			mensaje = e.getMessage();
+	public String modificarCarrera(@Valid @ModelAttribute("carrera") CarreraDTO carreraDTO, BindingResult result , Model model) {
+		if(result.hasErrors()) {
+			Boolean edicion = true;
+			model.addAttribute("carrera" , carreraDTO);
+			model.addAttribute("edicion" , edicion);
+			model.addAttribute("titulo" , "Modificar Carrera");
+			return "formularios/carrera";
+		}else {
+			Boolean exito = false;
+			String mensaje = "";
+			try {
+				carreraService.modificarCarrera(carreraDTO);
+				mensaje = "Carrera modificada con exito!";
+				exito = true;
+			}catch(Exception e) {
+				mensaje = e.getMessage();
+			}
+			model.addAttribute("mensaje", mensaje);
+			model.addAttribute("exito", exito);
+			model.addAttribute("carreras", carreraService.getCarreras());
+			model.addAttribute("titulo", "Carreras");
+			return "listados/carreras";
 		}
-		model.addAttribute("mensaje", mensaje);
-		model.addAttribute("exito", exito);
-		model.addAttribute("carreras", carreraService.getCarreras());
-		model.addAttribute("titulo", "Carreras");
-		return "carreras";
 	}
 	
 	@GetMapping("/eliminar/{codigo}")

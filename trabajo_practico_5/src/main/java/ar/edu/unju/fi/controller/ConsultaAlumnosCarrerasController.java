@@ -27,7 +27,7 @@ public class ConsultaAlumnosCarrerasController {
 		model.addAttribute("exito", false);
 		model.addAttribute("mensaje", "");
 
-		return "consultaAlumnoCarrera";
+		return "consultas/consultaAlumnoCarrera";
 	}
 	
 	
@@ -40,6 +40,6 @@ public class ConsultaAlumnosCarrerasController {
 		model.addAttribute("titulo", "Consulta de Alumnos");
 		model.addAttribute("exito", false);
 		model.addAttribute("mensaje", "");
-		return "consultaAlumnoCarrera";
+		return "consultas/consultaAlumnoCarrera";
 	}
 }

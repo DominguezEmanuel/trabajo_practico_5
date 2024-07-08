@@ -6,11 +6,13 @@
 		
 		<nav data-th-replace="~{/layouts/navbar :: navbar}"></nav>
 		
+		<div class="container-fluid">
 		<div class="container mb-3">
 			<div class="row py-5 bg-dark rounded-4">
 				<h2 class="text-white text-center mb-3">Filtrado de Alumnos por Materia</h2>
 				<form data-th-action="@{/filtrar/buscar}" method="post">
-				
+
+					
 					<div class="row mb-3 justify-content-center"> 
 						<label for="materia"
 						class="col-sm-6 col-lg-2 col-form-label text-lg-end bg-warning text-dark rounded-pill">Seleccione una Materia</label>
@@ -23,14 +25,15 @@
 					</div>
 					<p class="text-center"> <input type="submit" class="btn btn-warning" value="Filtrar Alumnos"> </p>
 				</form>
-				
-				<h2 class="text-center text-white m-3" data-th-text=" 'Alumnos en la materia: ' + ${materiaSeleccionada}"></h2>
+				<h2 class="text-center text-white mb-0">Alumnos en la materia</h2>
+				<h2 class="text-center text-white mb-3" data-th-text="${materiaSeleccionada}"></h2>
 				
 				<div class="container mt-2">
 					<div class="row" th:if="${alumnos != null}">
 						<div class="col-sm-6 col-md-4 mb-3" th:each="a : ${alumnos}">
 							<div class="card">
 								<div class="card-body">
+									<i class="bi bi-file-earmark-person mb-1"></i>
 									<h5 class="card-title" th:text="${a.nombre} + ' ' + ${a.apellido}"></h5>
 									<p class="card-text">
 										<strong>LU: </strong> <span th:text="${a.lu}"></span><br>
@@ -44,6 +47,7 @@
 				</div>
 			</div>
 		</div>
+				</div>
 		
 		<footer data-th-replace="~{/layouts/footer :: footer}"></footer>
 		

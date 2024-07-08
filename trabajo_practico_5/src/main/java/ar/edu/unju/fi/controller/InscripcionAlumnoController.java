@@ -29,7 +29,7 @@ public class InscripcionAlumnoController {
 		model.addAttribute("alumnos" , alumnoService.getAlumnos());
 		model.addAttribute("inscripto" , inscripto);
 		model.addAttribute("mensaje" , mensaje);
-		return "inscripcion_form";
+		return "consultas/inscripcion_form";
 	}
 	
 	@PostMapping("/materias")
@@ -45,13 +45,13 @@ public class InscripcionAlumnoController {
 				mensaje = "Alumno inscripto correctamente";
 				inscripto = true;
 			}catch(Exception e) {
-				mensaje = "Ha ocurrido un pronlema durante la inscripción";
+				mensaje = "Ha ocurrido un problema durante la inscripción";
 			}
 		}
 		model.addAttribute("materias" , materiaService.getMaterias());
 		model.addAttribute("alumnos" , alumnoService.getAlumnos());
 		model.addAttribute("inscripto" , inscripto);
 		model.addAttribute("mensaje" , mensaje);
-		return "inscripcion_form";
+		return "consultas/inscripcion_form";
 	}
 }

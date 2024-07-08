@@ -28,7 +28,7 @@ public class filtrarAlumnoMateriaController {
 	    model.addAttribute("materiaSeleccionada", "(Seleccione una materia)");
 		model.addAttribute("exito", false);
 		model.addAttribute("mensaje", "");
-		return "filtrarAlumnosMateria";
+		return "consultas/filtrarAlumnosMateria";
 	}
 	
 	@PostMapping("/buscar")
@@ -39,6 +39,6 @@ public class filtrarAlumnoMateriaController {
 		model.addAttribute("titulo", "Filtrado de Alumnos");
 		model.addAttribute("exito", false);
 		model.addAttribute("mensaje", "");
-		return "filtrarAlumnosMateria";
+		return "consultas/filtrarAlumnosMateria";
 	}
 }

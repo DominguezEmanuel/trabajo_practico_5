@@ -19,14 +19,15 @@ public class AlumnoDTO {
 	@Min(value=1,message="Debe ingresar un DNI válido")
 	private int dni;
 	@NotEmpty(message="Debe ingresar su nombre")
-	@Pattern(regexp= "[a-z A-Z]*", message="Debe ingresar únicamente letras")
+	@Pattern(regexp= "[a-zA-ZÁÉÍÓÚáéíóúüÜñÑ ]*", message="Debe ingresar únicamente letras")
 	private String nombre;
 	@NotEmpty(message="Debe ingresar su apellido")
-	@Pattern(regexp= "[a-z A-Z]*", message="Debe ingresar únicamente letras")
+	@Pattern(regexp="[a-zA-ZÁÉÍÓÚáéíóúüÜñÑ ]*", message="Debe ingresar únicamente letras")
 	private String apellido;
 	@NotEmpty(message="Debe ingresar su email")
 	private String email;
 	@NotEmpty(message="Debe ingresar su telefono")
+	@Pattern(regexp="[0-9]*", message="Debe ingresar únicamente números")
 	private String telefono;
 	@NotBlank(message = "Debe ingresar una fecha")
 	private String fechaNacimiento;

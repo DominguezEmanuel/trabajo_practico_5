@@ -32,7 +32,7 @@ public class AlumnoController {
 		model.addAttribute("titulo", "Alumnos");
 		model.addAttribute("exito", false);
 		model.addAttribute("mensaje", "");
-		return "alumnos";
+		return "listados/alumnos";
 	}
 
 	@GetMapping("/nuevo")
@@ -41,7 +41,7 @@ public class AlumnoController {
 		model.addAttribute("alumno", alumnoDTO);
 		model.addAttribute("edicion", edicion);
 		model.addAttribute("titulo", "Nuevo Alumno");
-		return "alumno";
+		return "formularios/alumno";
 	}
 
 	@PostMapping("/guardar")
@@ -49,11 +49,11 @@ public class AlumnoController {
 		ModelAndView modelView;
 
 		if (result.hasErrors()) {
-			modelView = new ModelAndView("alumno");
+			modelView = new ModelAndView("formularios/alumno");
 			modelView.addObject("alumno", alumnoDTO);
 			modelView.addObject("titulo", "Nuevo Alumno");
 		} else {
-			modelView = new ModelAndView("alumnos");
+			modelView = new ModelAndView("listados/alumnos");
 			Boolean exito = alumnoService.agregarAlumno(alumnoDTO);
 			String mensaje;
 			if (exito) {
@@ -75,26 +75,34 @@ public class AlumnoController {
 		model.addAttribute("edicion", edicion);
 		model.addAttribute("alumno", alumnoEncontradoDTO);
 		model.addAttribute("titulo", "Modificar Alumno");
-		return "alumno";
+		return "formularios/alumno";
 	}
 
 	@PostMapping("/modificar")
-	public String modificarAlumno(@Valid @ModelAttribute("alumno") AlumnoDTO alumnoDTO, Model model, BindingResult result) {
-		Boolean exito = false;
-		String mensaje = "";
-		try {
-			alumnoService.modificarAlumno(alumnoDTO);
-			mensaje = "Alumno modificado con exito!";
-			exito = true;
-		}catch(Exception e) {
-			mensaje = e.getMessage();
+	public String modificarAlumno(@Valid @ModelAttribute("alumno") AlumnoDTO alumnoDTO, BindingResult result , Model model) {
+		if(result.hasErrors()) {
+			Boolean edicion = true;
+			model.addAttribute("alumno" , alumnoDTO);
+			model.addAttribute("edicion" , edicion);
+			model.addAttribute("titulo" , "Modificar Alumno");
+			return "formularios/alumno";
+		}else {
+			Boolean exito = false;
+			String mensaje = "";
+			try {
+				alumnoService.modificarAlumno(alumnoDTO);
+				mensaje = "Alumno modificado con exito!";
+				exito = true;
+			}catch(Exception e) {
+				mensaje = e.getMessage();
+			}
+			model.addAttribute("mensaje", mensaje);
+			model.addAttribute("exito", exito);
+			model.addAttribute("alumnos", alumnoService.getAlumnos());
+			model.addAttribute("titulo", "Alumnos");
+			return "listados/alumnos";
 		}
-		model.addAttribute("mensaje", mensaje);
-		model.addAttribute("exito", exito);
-		model.addAttribute("alumnos", alumnoService.getAlumnos());
-		model.addAttribute("titulo", "Alumnos");
-		return "alumnos";
-		}
+	}
 
 	@GetMapping("/eliminar/{lu}")
 	public String eliminarAlumno(@PathVariable(value = "lu") Integer lu) {
