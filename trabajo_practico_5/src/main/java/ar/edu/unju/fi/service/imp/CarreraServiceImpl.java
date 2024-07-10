@@ -1,5 +1,6 @@
 package ar.edu.unju.fi.service.imp;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import ar.edu.unju.fi.dto.AlumnoDTO;
 import ar.edu.unju.fi.dto.CarreraDTO;
 import ar.edu.unju.fi.mapper.AlumnoMapper;
 import ar.edu.unju.fi.mapper.CarreraMapper;
+import ar.edu.unju.fi.model.Alumno;
 import ar.edu.unju.fi.model.Carrera;
 import ar.edu.unju.fi.repository.CarreraRepository;
 import ar.edu.unju.fi.service.ICarreraService;
@@ -22,20 +24,31 @@ public class CarreraServiceImpl implements ICarreraService{
 	private CarreraRepository carreraRepository;
 	@Autowired
 	private CarreraMapper carreraMapper;
-
 	@Autowired
 	AlumnoMapper alumnoMapper;
 	
 	
 	public List<AlumnoDTO> getAlumnosCarrera(int codigo){
 	Carrera carrera = carreraRepository.findById(codigo).get();
-	List<AlumnoDTO> alumnos = alumnoMapper.toAlumnoDTOList(carrera.getAlumnos());
-	return alumnos;
+	List<Alumno> alumnos =carrera.getAlumnos();
+	List<AlumnoDTO> alumnosDTO = new ArrayList<AlumnoDTO>();
+	for(Alumno a: alumnos) {
+		if(a.getEstado() == true) {
+			alumnosDTO.add(alumnoMapper.toAlumnoDTO(a));
+		}
+	}
+	return alumnosDTO;
 	}
 	@Override
 	public List<CarreraDTO> getCarreras() {
-		List<CarreraDTO> carrerasDTO = carreraMapper.toCarreraDTOList(carreraRepository.findAll());
-		return carrerasDTO;
+		List<Carrera> carreras = carreraRepository.findAll();
+		List<CarreraDTO>  carrerasDTOActivas = new ArrayList<CarreraDTO>();
+		for(Carrera c: carreras) {
+			if(c.getEstado() == true) {
+				carrerasDTOActivas.add(carreraMapper.toCarreraDTO(c));
+			}
+		}
+		return carrerasDTOActivas;
 	}
 
 	@Override
@@ -61,14 +74,16 @@ public class CarreraServiceImpl implements ICarreraService{
 
 	@Override
 	public void eliminarCarrera(int codigo) {
-		Carrera carrera  = carreraRepository.findById(codigo).get();
-		carreraRepository.delete(carrera);
+		Carrera carrera = carreraRepository.findById(codigo).get();
+		carrera.setEstado(false);
+		carreraRepository.save(carrera);
 		log.info("Carrera eliminada");
 	}
 
 	@Override
 	public void modificarCarrera(CarreraDTO carreraDTO) throws Exception {
 		Carrera carreraNueva = carreraMapper.toCarrera(carreraDTO);
+		carreraNueva.setEstado(true);
 		carreraRepository.save(carreraNueva);
 		log.info("carrera modificada");
 	}

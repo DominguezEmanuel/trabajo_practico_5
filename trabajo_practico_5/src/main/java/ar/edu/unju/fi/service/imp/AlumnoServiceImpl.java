@@ -1,7 +1,7 @@
 package ar.edu.unju.fi.service.imp;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,7 +30,14 @@ public class AlumnoServiceImpl implements IAlumnoService {
 	
 	@Override
 	public List<AlumnoDTO> getAlumnos() {
-		List<AlumnoDTO> alumnosDTO = alumnoMapper.toAlumnoDTOList(alumnoRepository.findAll());
+		List <Alumno> alumnos = alumnoRepository.findAll();
+		List<AlumnoDTO> alumnosDTO= new ArrayList<AlumnoDTO>();
+		for(Alumno a: alumnos) {
+			if(a.getEstado()  == true) {
+				alumnosDTO.add(alumnoMapper.toAlumnoDTO(a));
+			}
+		}
+		
 		return alumnosDTO;
 	}
 
@@ -70,7 +77,9 @@ public class AlumnoServiceImpl implements IAlumnoService {
 	@Override
 	public Boolean agregarAlumno(AlumnoDTO alumnoDTO) {
 		Boolean respuesta;
-		Alumno alumno = alumnoRepository.save(alumnoMapper.toAlumno(alumnoDTO));
+		Alumno alumnoNuevo = alumnoMapper.toAlumno(alumnoDTO);
+		alumnoNuevo.setEstado(true);
+		Alumno alumno = alumnoRepository.save(alumnoNuevo);
 		if(alumno != null ) {
 			respuesta = true;
 			log.info("Alumno agregado");
@@ -84,21 +93,17 @@ public class AlumnoServiceImpl implements IAlumnoService {
 
 	@Override
 	public void eliminarAlumno(Integer lu) {
-		 Optional<Alumno> alumnoOpt = alumnoRepository.findById(lu);
-	        if (alumnoOpt.isPresent()) {
-	            Alumno alumno = alumnoOpt.get();
-	            for (Materia materia : alumno.getMaterias()) {
-	                materia.getAlumnos().remove(alumno);
-	                materiaRepository.save(materia);  // Actualizar la materia en la base de datos
-	            }
-	            alumnoRepository.delete(alumno);
-	        }
-	        log.info("Alumno eliminado");
+		Alumno alumno = alumnoRepository.findById(lu).get();
+		alumno.setEstado(false);
+		alumnoRepository.save(alumno);
+			log.info("Alumno eliminado");
 	}
 
 	@Override
 	public void modificarAlumno(AlumnoDTO alumnoDTO) throws Exception {
-		alumnoRepository.save(alumnoMapper.toAlumno(alumnoDTO));
+		Alumno alumno=alumnoMapper.toAlumno(alumnoDTO);
+		alumno.setEstado(true);
+		alumnoRepository.save(alumno);
 		log.info("Alumno modificado");
 	}
 

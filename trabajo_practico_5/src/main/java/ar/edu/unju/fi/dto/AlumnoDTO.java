@@ -34,5 +34,6 @@ public class AlumnoDTO {
 	@NotEmpty(message = "Debe ingresar su domicilio")
 	private String domicilio;
 	
+	private Boolean estado;
 	private Integer lu;
 }

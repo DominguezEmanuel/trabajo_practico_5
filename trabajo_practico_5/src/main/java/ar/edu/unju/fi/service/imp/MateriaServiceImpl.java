@@ -1,5 +1,6 @@
 package ar.edu.unju.fi.service.imp;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import ar.edu.unju.fi.dto.AlumnoDTO;
 import ar.edu.unju.fi.dto.MateriaDTO;
 import ar.edu.unju.fi.mapper.AlumnoMapper;
 import ar.edu.unju.fi.mapper.MateriaMapper;
+import ar.edu.unju.fi.model.Alumno;
 import ar.edu.unju.fi.model.Materia;
 import ar.edu.unju.fi.repository.MateriaRepository;
 import ar.edu.unju.fi.service.IMateriaService;
@@ -27,7 +29,13 @@ public class MateriaServiceImpl implements IMateriaService {
 
 	@Override
 	public List<MateriaDTO> getMaterias() {
-		List<MateriaDTO> materiasDTO = materiaMapper.toMateriaDTOList(materiaRepository.findAll());
+		List<Materia> materias = materiaRepository.findAll();
+		List<MateriaDTO> materiasDTO =  new ArrayList<MateriaDTO>();
+		for(Materia m: materias) {
+			if(m.getEstado() == true) {
+				materiasDTO.add(materiaMapper.toMateriaDTO(m));
+			}
+		}
 		return materiasDTO;
 	}
 
@@ -41,7 +49,9 @@ public class MateriaServiceImpl implements IMateriaService {
 	@Override
 	public Boolean agregarMateria(MateriaDTO materiaDTO) {
 		Boolean respuesta;
-		Materia materia = materiaRepository.save(materiaMapper.toMateria(materiaDTO));
+		Materia nuevaMateria = materiaMapper.toMateria(materiaDTO);
+		nuevaMateria.setEstado(true);
+		Materia materia = materiaRepository.save(nuevaMateria);
 		if (materia != null) {
 			respuesta = true;
 			log.info("Materia agregada");
@@ -55,20 +65,29 @@ public class MateriaServiceImpl implements IMateriaService {
 	@Override
 	public void eliminarMateria(int codigo) {
 		Materia materia = materiaRepository.findById(codigo).get();
-		materiaRepository.delete(materia);
+		materia.setEstado(false);
+		materiaRepository.save(materia);
 		log.info("Materia eliminada");
 	}
 
 	@Override
 	public void modificarMateria(MateriaDTO materiaDTO) throws Exception {
-		materiaRepository.save(materiaMapper.toMateria(materiaDTO));
+		Materia materia = materiaMapper.toMateria(materiaDTO);
+		materia.setEstado(true);
+		materiaRepository.save(materia);
 		log.info("Materia modificada");
 	}
 
 	@Override
 	public List<AlumnoDTO> getAlumnosMateria(int codigo) {
 		Materia materia = materiaRepository.findById(codigo).get();
-		List<AlumnoDTO> alumnos = alumnoMapper.toAlumnoDTOList(materia.getAlumnos());
-		return alumnos;
+		List<Alumno> alumnos =materia.getAlumnos();
+		List<AlumnoDTO> alumnosDTO = new ArrayList<AlumnoDTO>();
+		for(Alumno a: alumnos) {
+			if(a.getEstado() == true) {
+				alumnosDTO.add(alumnoMapper.toAlumnoDTO(a));
+			}
+		}
+		return alumnosDTO;
 	}
 }

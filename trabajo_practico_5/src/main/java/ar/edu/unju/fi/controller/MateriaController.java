@@ -55,7 +55,7 @@ public class MateriaController {
 	public String getNuevaMateriaPage(Model model) {
 		Boolean edicion = false;
 		model.addAttribute("carreras", carreraService.getCarreras());
-		model.addAttribute("docentes", docenteService.getDocentes());
+		model.addAttribute("docentes", docenteService.getDocentesForMateria());
 		model.addAttribute("materia", materiaDTO);
 		model.addAttribute("edicion", edicion);
 		model.addAttribute("titulo", "Nueva Materia");
@@ -68,7 +68,7 @@ public class MateriaController {
 		if(result.hasErrors()) {
 			modelView = new ModelAndView("formularios/materia");
 			modelView.addObject("materia",materiaDTO);
-			modelView.addObject("docentes", docenteService.getDocentes());
+			modelView.addObject("docentes", docenteService.getDocentesForMateria());
 			modelView.addObject("carreras", carreraService.getCarreras());
 			modelView.addObject("titulo","Nueva Materia");
 		}else {
@@ -125,7 +125,7 @@ public class MateriaController {
 				mensaje = "Materia modificada con exito!";
 				exito = true;
 			}catch(Exception e) {
-				mensaje = e.getMessage();
+				mensaje = "El docente ya tiene una materia asignada";
 			}
 			model.addAttribute("mensaje", mensaje);
 			model.addAttribute("exito", exito);

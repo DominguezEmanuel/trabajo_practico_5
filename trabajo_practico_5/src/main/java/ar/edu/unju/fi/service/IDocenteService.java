@@ -7,7 +7,7 @@ import ar.edu.unju.fi.dto.DocenteDTO;
 public interface IDocenteService {
 
 	List<DocenteDTO> getDocentes();
-	
+    List<DocenteDTO> getDocentesForMateria();
 	DocenteDTO buscarDocente(Integer legajo);
 	
 	Boolean agregarDocente(DocenteDTO docenteDTO);

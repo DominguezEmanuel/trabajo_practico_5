@@ -1,5 +1,6 @@
 package ar.edu.unju.fi.service.imp;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,6 @@ import org.springframework.stereotype.Service;
 import ar.edu.unju.fi.dto.DocenteDTO;
 import ar.edu.unju.fi.mapper.DocenteMapper;
 import ar.edu.unju.fi.model.Docente;
-import ar.edu.unju.fi.model.Materia;
 import ar.edu.unju.fi.repository.DocenteRepository;
 import ar.edu.unju.fi.repository.MateriaRepository;
 import ar.edu.unju.fi.service.IDocenteService;
@@ -26,10 +26,24 @@ public class DocenteServiceImpl implements IDocenteService {
 	private DocenteMapper docenteMapper;
 	@Override
 	public List<DocenteDTO> getDocentes() {
-		List<DocenteDTO> docentesDTO = docenteMapper.toDocenteDTOList(docenteRepository.findAll());
+		List<Docente> docentes =docenteRepository.findAll();
+		List<DocenteDTO> docentesDTO = new ArrayList<DocenteDTO>();
+		for(Docente d: docentes) {
+			if(d.getEstado() == true)
+				docentesDTO.add(docenteMapper.toDocenteDTO(d));
+		}
 		return docentesDTO;
 	}
-
+	@Override
+	public List<DocenteDTO> getDocentesForMateria() {
+		List<Docente> docentes =docenteRepository.findAll();
+		List<DocenteDTO> docentesDTO = new ArrayList<DocenteDTO>();
+		for(Docente d: docentes) {
+			if(d.getEstado() == true && d.getMateria() == null)
+				docentesDTO.add(docenteMapper.toDocenteDTO(d));
+		}
+		return docentesDTO;
+	}
 	@Override
 	public DocenteDTO buscarDocente(Integer legajo) {
 		DocenteDTO docenteDTO = docenteMapper.toDocenteDTO(docenteRepository.findById(legajo).get());
@@ -40,7 +54,9 @@ public class DocenteServiceImpl implements IDocenteService {
 	@Override
 	public Boolean agregarDocente(DocenteDTO docenteDTO) {
 		Boolean respuesta;
-		Docente docente = docenteRepository.save(docenteMapper.toDocente(docenteDTO));
+		Docente docenteNuevo = docenteMapper.toDocente(docenteDTO);
+		docenteNuevo.setEstado(true);
+		Docente docente = docenteRepository.save(docenteNuevo);
 		if(docente != null) {
 			respuesta = true;
 			log.info("Docente agregado");
@@ -54,17 +70,16 @@ public class DocenteServiceImpl implements IDocenteService {
 	@Override
 	public void eliminarDocente(Integer legajo) {
 		Docente docente = docenteRepository.findById(legajo).get();
-		Materia materiaDocente = docente.getMateria();
-		materiaDocente.setDocente(null);
-		docenteRepository.delete(docente);
-		materiaRepository.save(materiaDocente);
-		docente.setMateria(null);
+		docente.setEstado(false);
+		docenteRepository.save(docente);
 		log.info("Docente eliminado");
 	}
 
 	@Override
 	public void modificarDocente(DocenteDTO docenteDTO) throws Exception {
-		docenteRepository.save(docenteMapper.toDocente(docenteDTO));
+		Docente docente = docenteMapper.toDocente(docenteDTO);
+		docente.setEstado(true);
+		docenteRepository.save(docente);
 		log.info("Docente modificado");
 	}
 }

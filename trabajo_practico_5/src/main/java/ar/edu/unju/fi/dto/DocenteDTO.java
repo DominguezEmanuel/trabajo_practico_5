@@ -26,4 +26,6 @@ public class DocenteDTO {
 	@NotBlank(message = "Debe ingresar un teléfono")
 	@Pattern(regexp="[0-9]*", message="Debe ingresar únicamente números")
 	private String telefono;
+	
+	private Boolean estado;
 }
