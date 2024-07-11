@@ -11,7 +11,9 @@ import ar.edu.unju.fi.dto.MateriaDTO;
 import ar.edu.unju.fi.mapper.AlumnoMapper;
 import ar.edu.unju.fi.mapper.MateriaMapper;
 import ar.edu.unju.fi.model.Alumno;
+import ar.edu.unju.fi.model.Docente;
 import ar.edu.unju.fi.model.Materia;
+import ar.edu.unju.fi.repository.DocenteRepository;
 import ar.edu.unju.fi.repository.MateriaRepository;
 import ar.edu.unju.fi.service.IMateriaService;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +24,8 @@ public class MateriaServiceImpl implements IMateriaService {
 
 	@Autowired
 	private MateriaRepository materiaRepository;
+	@Autowired
+	private DocenteRepository docenteRepository;
 	@Autowired
 	private MateriaMapper materiaMapper;
 	@Autowired
@@ -66,6 +70,10 @@ public class MateriaServiceImpl implements IMateriaService {
 	public void eliminarMateria(int codigo) {
 		Materia materia = materiaRepository.findById(codigo).get();
 		materia.setEstado(false);
+		Docente docenteMateria = docenteRepository.findById(materia.getDocente().getLegajo()).get();
+		materia.setDocente(null);
+		docenteMateria.setMateria(null);
+		docenteRepository.save(docenteMateria);
 		materiaRepository.save(materia);
 		log.info("Materia eliminada");
 	}
