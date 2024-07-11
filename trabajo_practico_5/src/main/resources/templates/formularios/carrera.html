@@ -20,10 +20,10 @@
 					<form data-th-action="${edicion}?@{/carrera/modificar} : @{/carrera/guardar}" th:object="${carrera}" method="post">
 						<div class="container-fluid">
 							
-						<div class="row mb-3 justify-content-center">
+						<div th:if="${edicion}" class="row mb-3 justify-content-center">
 							<label for="codigo" class="col-sm-6 col-lg-2 col-form-label text-lg-end bg-warning text-dark rounded-pill">Código</label>
 							<div class="col-sm-6 col-lg-4">
-								<input type="hidden" class="form-control" id="codigo" th:field="*{codigo}" th:if="${edicion}">
+								<input type="text" class="form-control" id="codigo" th:field="*{codigo}" readonly>
 							</div>
 						</div>
 						
