@@ -8,11 +8,15 @@ public interface IAlumnoService {
 	
 	List<AlumnoDTO> getAlumnos();
 	
-	AlumnoDTO buscarAlumno(String lu);
+	void agregarMateria(Integer lu,  Integer codigo);
+	
+	AlumnoDTO buscarAlumno(Integer lu);
 	
 	Boolean agregarAlumno(AlumnoDTO alumnoDTO);
-	
-	void eliminarAlumno(String lu);
+		
+	void eliminarAlumno(Integer lu);
 	
 	void modificarAlumno(AlumnoDTO alumnoDTO) throws Exception;
+	
+	Boolean buscarRepetidos(Integer lu , Integer codigo);
 }

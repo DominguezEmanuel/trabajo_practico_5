@@ -18,6 +18,7 @@ public interface DocenteMapper {
 	@Mapping(source="apellido" , target="apellido")
 	@Mapping(source="email" , target="email")
 	@Mapping(source="telefono" , target="telefono")
+	@Mapping(source="estado", target="estado")
 	DocenteDTO toDocenteDTO(Docente docente);
 	
 	@InheritInverseConfiguration

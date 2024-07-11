@@ -2,6 +2,8 @@ package ar.edu.unju.fi.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,8 +17,7 @@ import ar.edu.unju.fi.dto.MateriaDTO;
 import ar.edu.unju.fi.service.ICarreraService;
 import ar.edu.unju.fi.service.IDocenteService;
 import ar.edu.unju.fi.service.IMateriaService;
-
-import org.springframework.ui.Model;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/materia")
@@ -39,6 +40,7 @@ public class MateriaController {
 	
 	@Autowired
 	private ICarreraService carreraService;
+
 	
 	@GetMapping("/listado")
 	public String getMateriaPage(Model model) {
@@ -46,37 +48,46 @@ public class MateriaController {
 		model.addAttribute("titulo", "Materias");
 		model.addAttribute("exito", false);
 		model.addAttribute("mensaje", "");
-		return "materias";
+		return "listados/materias";
 	}
 	
 	@GetMapping("/nuevo")
 	public String getNuevaMateriaPage(Model model) {
 		Boolean edicion = false;
 		model.addAttribute("carreras", carreraService.getCarreras());
-		model.addAttribute("docentes", docenteService.getDocentes());
+		model.addAttribute("docentes", docenteService.getDocentesForMateria());
 		model.addAttribute("materia", materiaDTO);
 		model.addAttribute("edicion", edicion);
 		model.addAttribute("titulo", "Nueva Materia");
-		return "materia";
+		return "formularios/materia";
 	}
 	
 	@PostMapping("/guardar")
-	public ModelAndView guardarMateria(@ModelAttribute("materia") MateriaDTO materiaDTO) {
-		ModelAndView modelView = new ModelAndView("materias");
-		String mensaje = "";
-		carreraDTO = carreraService.buscarCarrera(materiaDTO.getCarrera().getCodigo());
-		docenteDTO = docenteService.buscarDocente(materiaDTO.getDocente().getLegajo());
-		materiaDTO.setCarrera(carreraDTO);
-		materiaDTO.setDocente(docenteDTO);
-		Boolean exito = materiaService.agregarMateria(materiaDTO);
-		if (exito) {
-			mensaje = "Materia guardada con éxito!";
+	public ModelAndView guardarMateria(@Valid @ModelAttribute("materia") MateriaDTO materiaDTO, BindingResult result) {
+		ModelAndView modelView;
+		if(result.hasErrors()) {
+			modelView = new ModelAndView("formularios/materia");
+			modelView.addObject("materia",materiaDTO);
+			modelView.addObject("docentes", docenteService.getDocentesForMateria());
+			modelView.addObject("carreras", carreraService.getCarreras());
+			modelView.addObject("titulo","Nueva Materia");
 		}else {
-			mensaje = "La materia no se pudo guardar";
+			modelView = new ModelAndView("listados/materias");
+			String mensaje = "";
+			carreraDTO = carreraService.buscarCarrera(materiaDTO.getCarrera().getCodigo());
+			docenteDTO = docenteService.buscarDocente(materiaDTO.getDocente().getLegajo());
+			materiaDTO.setCarrera(carreraDTO);
+			materiaDTO.setDocente(docenteDTO);
+			Boolean exito = materiaService.agregarMateria(materiaDTO);
+			if (exito) {
+				mensaje = "Materia guardada con éxito!";
+			}else {
+				mensaje = "La materia no se pudo guardar";
+			}
+			modelView.addObject("exito", exito);
+			modelView.addObject("mensaje", mensaje);
+			modelView.addObject("materias", materiaService.getMaterias());
 		}
-		modelView.addObject("exito", exito);
-		modelView.addObject("mensaje", mensaje);
-		modelView.addObject("materias", materiaService.getMaterias());
 		return modelView;
 	}
 	
@@ -89,29 +100,39 @@ public class MateriaController {
 		model.addAttribute("titulo", "Modificar Materia");
 		model.addAttribute("carreras", carreraService.getCarreras());
 		model.addAttribute("docentes", docenteService.getDocentes());
-		return "materia";
+		return "formularios/materia";
 	}
 	
 	@PostMapping("/modificar")
-	public String modificarMateria(@ModelAttribute("materia") MateriaDTO materiaDTO, Model model) {
-		carreraDTO = carreraService.buscarCarrera(materiaDTO.getCarrera().getCodigo());
-		docenteDTO = docenteService.buscarDocente(materiaDTO.getDocente().getLegajo());
-		materiaDTO.setCarrera(carreraDTO);
-		materiaDTO.setDocente(docenteDTO);
-		Boolean exito = false;
-		String mensaje = "";
-		try {
-			materiaService.modificarMateria(materiaDTO);
-			mensaje = "Materia modificada con exito!";
-			exito = true;
-		}catch(Exception e) {
-			mensaje = e.getMessage();
+	public String modificarMateria(@Valid @ModelAttribute("materia") MateriaDTO materiaDTO, BindingResult result , Model model) {
+		if(result.hasErrors()) {
+			Boolean edicion = true;
+			model.addAttribute("edicion", edicion);
+			model.addAttribute("materia", materiaDTO);
+			model.addAttribute("titulo", "Modificar Materia");
+			model.addAttribute("carreras", carreraService.getCarreras());
+			model.addAttribute("docentes", docenteService.getDocentes());
+			return "formularios/materia";
+		}else {
+			carreraDTO = carreraService.buscarCarrera(materiaDTO.getCarrera().getCodigo());
+			docenteDTO = docenteService.buscarDocente(materiaDTO.getDocente().getLegajo());
+			materiaDTO.setCarrera(carreraDTO);
+			materiaDTO.setDocente(docenteDTO);
+			Boolean exito = false;
+			String mensaje = "";
+			try {
+				materiaService.modificarMateria(materiaDTO);
+				mensaje = "Materia modificada con exito!";
+				exito = true;
+			}catch(Exception e) {
+				mensaje = "El docente ya tiene una materia asignada";
+			}
+			model.addAttribute("mensaje", mensaje);
+			model.addAttribute("exito", exito);
+			model.addAttribute("materias", materiaService.getMaterias());
+			model.addAttribute("titulo", "Materias");
+			return "listados/materias";
 		}
-		model.addAttribute("mensaje", mensaje);
-		model.addAttribute("exito", exito);
-		model.addAttribute("materias", materiaService.getMaterias());
-		model.addAttribute("titulo", "Materias");
-		return "materias";
 	}
 	
 	@GetMapping("/eliminar/{codigo}")
@@ -119,4 +140,7 @@ public class MateriaController {
 		materiaService.eliminarMateria(codigo);
 		return "redirect:/materia/listado";
 	}
+	
+	
+
 }

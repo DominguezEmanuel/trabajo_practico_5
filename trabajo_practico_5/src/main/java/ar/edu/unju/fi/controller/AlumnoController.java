@@ -11,8 +11,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.dto.AlumnoDTO;
 import ar.edu.unju.fi.service.IAlumnoService;
+import jakarta.validation.Valid;
 
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 
 @Controller
 @RequestMapping("/alumno")
@@ -20,75 +22,92 @@ public class AlumnoController {
 
 	@Autowired
 	private AlumnoDTO alumnoDTO;
-	
+
 	@Autowired
 	private IAlumnoService alumnoService;
-	
+
 	@GetMapping("/listado")
 	public String getAlumnosPage(Model model) {
 		model.addAttribute("alumnos", alumnoService.getAlumnos());
 		model.addAttribute("titulo", "Alumnos");
 		model.addAttribute("exito", false);
 		model.addAttribute("mensaje", "");
-		return "alumnos";
+		return "listados/alumnos";
 	}
-	
+
 	@GetMapping("/nuevo")
 	public String getNuevoAlumnoPage(Model model) {
 		Boolean edicion = false;
 		model.addAttribute("alumno", alumnoDTO);
 		model.addAttribute("edicion", edicion);
 		model.addAttribute("titulo", "Nuevo Alumno");
-		return "alumno";
+		return "formularios/alumno";
 	}
-	
+
 	@PostMapping("/guardar")
-	public ModelAndView guardarAlumno(@ModelAttribute("alumno") AlumnoDTO alumnoDTO) {
-		ModelAndView modelView = new ModelAndView("alumnos");
-		String mensaje;
-		Boolean exito = alumnoService.agregarAlumno(alumnoDTO);
-		if (exito) {
-			mensaje = "Alumno guardado con éxito!";
-		}else {
-			mensaje = "El alumno no se pudo guardar";
+	public ModelAndView guardarAlumno(@Valid @ModelAttribute("alumno") AlumnoDTO alumnoDTO, BindingResult result) {
+		ModelAndView modelView;
+
+		if (result.hasErrors()) {
+			modelView = new ModelAndView("formularios/alumno");
+			modelView.addObject("alumno", alumnoDTO);
+			modelView.addObject("titulo", "Nuevo Alumno");
+		} else {
+			modelView = new ModelAndView("listados/alumnos");
+			Boolean exito = alumnoService.agregarAlumno(alumnoDTO);
+			String mensaje;
+			if (exito) {
+				mensaje = "Alumno guardado con éxito!";
+			} else {
+				mensaje = "El alumno no se pudo guardar";
+			}
+			modelView.addObject("exito", exito);
+			modelView.addObject("mensaje", mensaje);
+			modelView.addObject("alumnos", alumnoService.getAlumnos());
 		}
-		modelView.addObject("exito", exito);
-		modelView.addObject("mensaje", mensaje);
-		modelView.addObject("alumnos", alumnoService.getAlumnos());
 		return modelView;
 	}
-	
+
 	@GetMapping("/modificar/{lu}")
-	public String getModificarAlumnoPage(Model model, @PathVariable(value="lu") String lu) {
+	public String getModificarAlumnoPage(Model model, @PathVariable(value = "lu") Integer lu) {
 		AlumnoDTO alumnoEncontradoDTO = alumnoService.buscarAlumno(lu);
 		boolean edicion = true;
 		model.addAttribute("edicion", edicion);
 		model.addAttribute("alumno", alumnoEncontradoDTO);
 		model.addAttribute("titulo", "Modificar Alumno");
-		return "alumno";
+		return "formularios/alumno";
 	}
-	
+
 	@PostMapping("/modificar")
-	public String modificarAlumno(@ModelAttribute("alumno") AlumnoDTO alumnoDTO, Model model) {
-		Boolean exito = false;
-		String mensaje = "";
-		try {
-			alumnoService.modificarAlumno(alumnoDTO);
-			mensaje = "Alumno modificado con exito!";
-			exito = true;
-		}catch(Exception e) {
-			mensaje = e.getMessage();
+	public String modificarAlumno(@Valid @ModelAttribute("alumno") AlumnoDTO alumnoDTO, BindingResult result , Model model) {
+		if(result.hasErrors()) {
+			Boolean edicion = true;
+			model.addAttribute("alumno" , alumnoDTO);
+			model.addAttribute("edicion" , edicion);
+			model.addAttribute("titulo" , "Modificar Alumno");
+			return "formularios/alumno";
+		}else {
+			Boolean exito = false;
+			String mensaje = "";
+			try {
+				alumnoService.modificarAlumno(alumnoDTO);
+				mensaje = "Alumno modificado con exito!";
+				exito = true;
+			}catch(Exception e) {
+				mensaje = e.getMessage();
+			}
+			model.addAttribute("mensaje", mensaje);
+			model.addAttribute("exito", exito);
+			model.addAttribute("alumnos", alumnoService.getAlumnos());
+			model.addAttribute("titulo", "Alumnos");
+			return "listados/alumnos";
 		}
-		model.addAttribute("mensaje", mensaje);
-		model.addAttribute("exito", exito);
-		model.addAttribute("alumnos", alumnoService.getAlumnos());
-		model.addAttribute("titulo", "Alumnos");
-		return "alumnos";
 	}
-	
+
 	@GetMapping("/eliminar/{lu}")
-	public String eliminarAlumno(@PathVariable(value="lu") String lu) {
+	public String eliminarAlumno(@PathVariable(value = "lu") Integer lu) {
 		alumnoService.eliminarAlumno(lu);
 		return "redirect:/alumno/listado";
 	}
+
 }

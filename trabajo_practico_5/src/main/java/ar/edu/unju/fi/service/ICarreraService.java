@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import ar.edu.unju.fi.dto.AlumnoDTO;
 import ar.edu.unju.fi.dto.CarreraDTO;
 
 @Service
@@ -12,6 +13,8 @@ public interface ICarreraService {
 	List<CarreraDTO> getCarreras();
 	
 	CarreraDTO buscarCarrera(int codigo);
+	
+	public List<AlumnoDTO> getAlumnosCarrera(int codigo);
 	
 	Boolean agregarCarrera(CarreraDTO carreraDTO);
 	
