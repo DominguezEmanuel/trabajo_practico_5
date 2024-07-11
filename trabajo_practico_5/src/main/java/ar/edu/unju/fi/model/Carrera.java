@@ -46,12 +46,11 @@ public class Carrera {
 	
 	/*
 	 * CascadeType.all: Especifica que las operaciones de persistencia deben propagarse a las entidades asociadas
-	 * orphanRemoval : especifica que las entidades hijas deben ser eliminadas cuando se eliminen de la colección padre
 	 */
-	@OneToMany(mappedBy = "carreraAlumno", cascade = CascadeType.ALL, orphanRemoval = true) //MAPEO RELACION CARRERA-ALUMNO
+	@OneToMany(mappedBy = "carreraAlumno",cascade = {CascadeType.PERSIST, CascadeType.MERGE}) //MAPEO RELACION CARRERA-ALUMNO
 	private List<Alumno> alumnos = new ArrayList<Alumno>();
 	
-	 @OneToMany(mappedBy = "carrera", cascade = CascadeType.ALL)
+	 @OneToMany(mappedBy = "carrera",cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	 private List <Materia> materias = new ArrayList<Materia>();
 
 	

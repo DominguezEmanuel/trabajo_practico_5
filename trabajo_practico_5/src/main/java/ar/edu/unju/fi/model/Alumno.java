@@ -61,6 +61,8 @@ public class Alumno {
 
 	@Column(name = "Domicilio")
 	private String domicilio;
+	@Column(name = "Estado")
+	private Boolean estado;
 
 	
 	@ManyToMany(mappedBy = "alumnos") //MAPEO RELACION ALUMNO-MATERIAS

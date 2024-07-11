@@ -52,6 +52,9 @@ public class Materia {
 	@Column(name = "Modalidad" , nullable = false)
 	private String modalidad;
 	
+	@Column(name = "Estado")
+	private Boolean estado;
+	
 	@ManyToMany //mapeo relacion alumnos-materias
 	@JoinTable(name = "materias_alumnos",
 	joinColumns= @JoinColumn(name = "Codigo_materia"),

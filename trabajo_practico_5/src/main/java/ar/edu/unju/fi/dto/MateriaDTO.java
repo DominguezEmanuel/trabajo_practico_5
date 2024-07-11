@@ -27,4 +27,6 @@ public class MateriaDTO {
 	private DocenteDTO docente;
 	@NotNull(message = "Debe ingresar una Carrera")
 	private CarreraDTO carrera;
+	
+	private Boolean estado;
 }

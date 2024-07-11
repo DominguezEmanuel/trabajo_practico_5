@@ -46,6 +46,9 @@ public class Docente {
 	@Column(name = "Telefono")
 	private String telefono;
 	
+	@Column(name = "Estado")
+	private Boolean estado;
+	
 	@OneToOne(mappedBy="docente")
 	private Materia materia;
 }
